@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import javax.swing.JButton;
+import java.awt.Cursor;
 
 public class CadProduto extends JFrame {
 
@@ -18,6 +20,22 @@ public class CadProduto extends JFrame {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CadProduto frame = new CadProduto();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -57,15 +75,22 @@ public class CadProduto extends JFrame {
 		textField_4.setColumns(10);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Unidade");
-		rdbtnNewRadioButton.setBounds(273, 432, 78, 23);
+		rdbtnNewRadioButton.setBounds(273, 418, 78, 23);
 		contentPane.add(rdbtnNewRadioButton);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Kg");
-		rdbtnNewRadioButton_1.setBounds(402, 432, 42, 23);
+		rdbtnNewRadioButton_1.setBounds(402, 417, 42, 23);
 		contentPane.add(rdbtnNewRadioButton_1);
 		
+		JButton btnConfirmarCadastro = new JButton("");
+		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnConfirmarCadastro.setContentAreaFilled(false);
+		btnConfirmarCadastro.setBorderPainted(false);
+		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
+		contentPane.add(btnConfirmarCadastro);
+		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Lucas.LUSCA\\Downloads\\Yellow Mint Minimalist Fruit Instagram Post .png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Lucas.LUSCA\\Downloads\\Yellow Mint Minimalist Fruit Instagram Post  (1).png"));
 		lblNewLabel.setBounds(0, 0, 539, 540);
 		contentPane.add(lblNewLabel);
 	}
