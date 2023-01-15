@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import java.awt.Cursor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CadProduto extends JFrame {
 
@@ -83,6 +85,11 @@ public class CadProduto extends JFrame {
 		contentPane.add(rdbtnNewRadioButton_1);
 		
 		JButton btnConfirmarCadastro = new JButton("");
+		btnConfirmarCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
 		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirmarCadastro.setContentAreaFilled(false);
 		btnConfirmarCadastro.setBorderPainted(false);
