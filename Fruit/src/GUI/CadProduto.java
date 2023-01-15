@@ -10,8 +10,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.event.ActionListener;
+import java.security.KeyStore.TrustedCertificateEntry;
 import java.awt.event.ActionEvent;
 
 public class CadProduto extends JFrame {
@@ -76,13 +79,25 @@ public class CadProduto extends JFrame {
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Unidade");
-		rdbtnNewRadioButton.setBounds(273, 418, 78, 23);
-		contentPane.add(rdbtnNewRadioButton);
 		
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Kg");
-		rdbtnNewRadioButton_1.setBounds(402, 417, 42, 23);
-		contentPane.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton btnQuantidade = new JRadioButton("Unidade");
+		btnQuantidade.setBounds(273, 418, 78, 23);
+		contentPane.add(btnQuantidade);
+		
+		JRadioButton btnKg = new JRadioButton("Kg");
+		btnKg.setBounds(402, 417, 42, 23);
+		contentPane.add(btnKg);
+		
+		btnQuantidade.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnKg.setSelected(false);}
+		});
+		
+		btnKg.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnQuantidade.setSelected(false);}
+		});
 		
 		JButton btnConfirmarCadastro = new JButton("");
 		btnConfirmarCadastro.addActionListener(new ActionListener() {
