@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 
 import java.awt.Cursor;
 import java.awt.EventQueue;
@@ -74,7 +74,7 @@ public class MenuInicial extends JFrame {
 		contentPane.add(btnNotas);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("src\\img\\MenuInicial.png"));
+		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuInicial.png"));
 		lblNewLabel.setBounds(0, 0, 499, 494);
 		contentPane.add(lblNewLabel);
 	}

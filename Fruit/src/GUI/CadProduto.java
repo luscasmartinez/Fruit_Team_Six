@@ -1,4 +1,4 @@
-package gui;
+package GUI;
 
 import java.awt.Cursor;
 import java.awt.EventQueue;
@@ -128,7 +128,7 @@ public class CadProduto extends JFrame {
 		contentPane.add(btnConfirmarCadastro);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("src\\img\\MenuCadastro.png"));
+		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuCadastro.png"));
 		lblNewLabel.setBounds(0, 0, 539, 540);
 		contentPane.add(lblNewLabel);
 	}
