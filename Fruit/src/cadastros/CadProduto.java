@@ -2,6 +2,8 @@ package cadastros;
 
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
 import construtores.Produto;
 import interfaces.IProdutos;
 
@@ -20,7 +22,7 @@ public class CadProduto implements IProdutos {
         if(p != null) {
             listaProdutos.remove(p);
         }else {
-            throw new Exception("Produto não existe!");
+            JOptionPane.showMessageDialog(null, "Produto não encontrado");
         }
     }
     @Override
