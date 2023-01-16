@@ -1,1 +1,8 @@
-# Fruit_Team_Six
+#Team Six
+
+## Membros
+
+* Camila Martini
+* Lucas Martinez
+* Pablo Guadagnin
+* Wagner Quadros

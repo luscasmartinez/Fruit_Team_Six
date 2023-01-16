@@ -121,12 +121,12 @@ public class CadProduto extends JFrame {
 		btnConfirmarCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Produto novoProduto = new Produto(textNome.getText(), 
+
 				textDescricao.getText(),
 				Integer.parseInt(textCodigo.getText()),
 				Double.parseDouble(textQuantidade.getText()),
 				Double.parseDouble(textPreco.getText()));
 
-				
 
 
 				setVisible(false);
