@@ -7,6 +7,14 @@ public class Produto {
     private double preco;
     private int quantidade;
 
+    public Produto(String nome, String descricao, int codigo, int quantidade, double preco){
+        this.nome = nome;
+        this.descricao = descricao;
+        this.codigo = codigo;
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+
     public void setCodigo(int codigo) { this.codigo = codigo;}
     public Object getCodigo() {return null;}
 
