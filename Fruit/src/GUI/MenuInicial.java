@@ -35,7 +35,7 @@ public class MenuInicial extends JFrame {
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Evento aqui
-				CadProduto cadProduto = new CadProduto();
+				MenuCadProduto cadProduto = new MenuCadProduto();
 				cadProduto.setVisible(true);
 			}
 		});

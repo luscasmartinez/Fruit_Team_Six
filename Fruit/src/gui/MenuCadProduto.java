@@ -4,20 +4,25 @@ import java.awt.Cursor;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
+import cadastros.CadProduto;
 import construtores.Produto;
 
-public class CadProduto extends JFrame {
+public class MenuCadProduto extends JFrame {
 
+	CadProduto novoCadProduto = new CadProduto();
 	private JPanel contentPane;
 	private JTextField textCodigo;
 	private JTextField textNome;
@@ -28,7 +33,7 @@ public class CadProduto extends JFrame {
 	/**
 	 * Cria a Janela.
 	 */
-	public CadProduto() {
+	public MenuCadProduto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 553, 580);
 		contentPane = new JPanel();
@@ -39,10 +44,15 @@ public class CadProduto extends JFrame {
 
 		// Campos de texto abaixo ->
 
-		textCodigo = new JTextField();
-		textCodigo.setBounds(273, 94, 171, 20);
-		contentPane.add(textCodigo);
-		textCodigo.setColumns(10);
+		try {
+			MaskFormatter mf = new MaskFormatter("#########");
+			textCodigo = new JFormattedTextField(mf);
+			textCodigo.setBounds(273, 94, 171, 20);
+			contentPane.add(textCodigo);
+			textCodigo.setColumns(10);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 
 		textNome = new JTextField();
 		textNome.setBounds(273, 154, 171, 20);
@@ -102,7 +112,16 @@ public class CadProduto extends JFrame {
 						Double.parseDouble(textQuantidade.getText()),
 						Double.parseDouble(textPreco.getText()));
 
-				setVisible(false);
+						try {
+							novoCadProduto.addProduto(novoProduto);
+						} catch (Exception e1) {
+							e1.printStackTrace();
+						}
+						for(Produto p: novoCadProduto.listaProdutos){
+							System.out.println(p);
+						}
+
+						setVisible(false);
 			}
 		});
 		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -7,21 +7,15 @@ import interfaces.IProdutos;
 
 public class CadProduto implements IProdutos {
 
-    private LinkedList<Produto> listaProdutos;
+    public LinkedList<Produto> listaProdutos;
 
-    public CadProduto() {
-        listaProdutos = new LinkedList<Produto>();
-    }
+    public CadProduto() {listaProdutos = new LinkedList<Produto>();}
 
     @Override
-    public void addProduto(Produto p) throws Exception {
-        listaProdutos.add(p);
-    }
+    public void addProduto(Produto p) throws Exception {listaProdutos.add(p);}
 
     @Override
-    public void removeProduto(int codigo) throws Exception {
-        listaProdutos.remove(codigo);
-    }
+    public void removeProduto(int codigo) throws Exception {listaProdutos.remove(codigo);}
 
     @Override
     public Produto getProduto(int codigo) throws Exception {

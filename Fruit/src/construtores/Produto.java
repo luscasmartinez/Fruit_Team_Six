@@ -29,4 +29,14 @@ public class Produto {
 
     public double getQuantidade() {return this.quantidade;}
     public void setQuantidade(double nova) {this.quantidade = (int) nova;}
+
+    @Override
+    public String toString() {
+        return "Código: " + codigo + 
+        ", Nome: " + nome + 
+        ", Descrição: " + descricao + 
+        ", Preço: " + preco + 
+        ", Quantidade: " + quantidade;
+    }
+
 }
