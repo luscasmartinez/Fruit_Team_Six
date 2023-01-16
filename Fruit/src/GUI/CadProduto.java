@@ -26,23 +26,7 @@ public class CadProduto extends JFrame {
 	private JTextField textQuantidade;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CadProduto frame = new CadProduto();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
+	 * Cria a Janela.
 	 */
 	public CadProduto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
