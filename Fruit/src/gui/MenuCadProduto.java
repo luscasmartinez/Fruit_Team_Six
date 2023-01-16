@@ -59,16 +59,23 @@ public class MenuCadProduto extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
+		
 		textDescricao = new JTextField();
 		textDescricao.setBounds(273, 226, 171, 20);
 		contentPane.add(textDescricao);
 		textDescricao.setColumns(10);
 
-		textPreco = new JTextField();
-		textPreco.setBounds(273, 304, 171, 20);
-		contentPane.add(textPreco);
-		textPreco.setColumns(10);
+		try{
+			MaskFormatter mf = new MaskFormatter("###.##");
+			textPreco = new JFormattedTextField(mf);
+			textPreco.setBounds(273, 304, 171, 20);
+			contentPane.add(textPreco);
+			textPreco.setColumns(10);
+		}catch(ParseException e){
+			e.printStackTrace();
+		}
 
+		
 		textQuantidade = new JTextField();
 		textQuantidade.setBounds(273, 377, 171, 20);
 		contentPane.add(textQuantidade);
