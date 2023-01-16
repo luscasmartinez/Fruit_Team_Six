@@ -57,12 +57,14 @@ public class MenuCadProduto extends JFrame {
 		}
 
 		textNome = new JTextField();
+		textNome.setFont(new Font("Arial", Font.PLAIN, 25));
 		textNome.setBounds(273, 149, 171, 29);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
 		
 		textDescricao = new JTextField();
+		textDescricao.setFont(new Font("Arial", Font.PLAIN, 25));
 		textDescricao.setBounds(273, 221, 171, 29);
 		contentPane.add(textDescricao);
 		textDescricao.setColumns(10);
@@ -70,6 +72,7 @@ public class MenuCadProduto extends JFrame {
 		try{
 			MaskFormatter mf = new MaskFormatter("###.##");
 			textPreco = new JFormattedTextField(mf);
+			textPreco.setFont(new Font("Arial", Font.PLAIN, 25));
 			textPreco.setBounds(273, 296, 171, 29);
 			contentPane.add(textPreco);
 			textPreco.setColumns(10);
@@ -80,6 +83,7 @@ public class MenuCadProduto extends JFrame {
 		
 		textQuantidade = new JTextField();
 		textQuantidade.setBounds(273, 368, 171, 29);
+		textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
 		contentPane.add(textQuantidade);
 		textQuantidade.setColumns(10);
 
