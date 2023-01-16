@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -70,7 +71,7 @@ public class MenuCadProduto extends JFrame {
 		textDescricao.setColumns(10);
 
 		try{
-			MaskFormatter mf = new MaskFormatter("###.##");
+			MaskFormatter mf = new MaskFormatter("##.##");
 			textPreco = new JFormattedTextField(mf);
 			textPreco.setFont(new Font("Arial", Font.PLAIN, 25));
 			textPreco.setBounds(273, 296, 171, 29);
@@ -114,27 +115,48 @@ public class MenuCadProduto extends JFrame {
 			}
 		});
 
+			
+
 		// Botão de cadastro
 
 		JButton btnConfirmarCadastro = new JButton("");
 		btnConfirmarCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Produto novoProduto = new Produto(textNome.getText(),
-						textDescricao.getText(),
-						Integer.parseInt(textCodigo.getText()),
-						Double.parseDouble(textQuantidade.getText()),
-						Double.parseDouble(textPreco.getText()));
+				
+				
+				if(btnKg.isSelected()){				
+					Produto novoProduto = new Produto(textNome.getText(),
+							textDescricao.getText(),
+							Integer.parseInt(textCodigo.getText()),
+							Double.parseDouble(textQuantidade.getText()),
+							Double.parseDouble(textPreco.getText()));
+							try {
+								novoCadProduto.addProduto(novoProduto);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+							for(Produto p: novoCadProduto.listaProdutos){
+								System.out.println(p);
+							}
 
-						try {
-							novoCadProduto.addProduto(novoProduto);
-						} catch (Exception e1) {
-							e1.printStackTrace();
+							
+						}else if(btnQuantidade.isSelected()){
+							Produto novoProduto = new Produto(textNome.getText(),
+							textDescricao.getText(),
+							Integer.parseInt(textCodigo.getText()),
+							Integer.parseInt(textQuantidade.getText()),
+							Double.parseDouble(textPreco.getText()));
+							try {
+								novoCadProduto.addProduto(novoProduto);
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+							for(Produto p: novoCadProduto.listaProdutos){
+								System.out.println(p);
+							}
+						}else{
+							JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
 						}
-						for(Produto p: novoCadProduto.listaProdutos){
-							System.out.println(p);
-						}
-
-						setVisible(false);
 			}
 		});
 		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -15,12 +15,18 @@ public class CadProduto implements IProdutos {
     public void addProduto(Produto p) throws Exception {listaProdutos.add(p);}
 
     @Override
-    public void removeProduto(int codigo) throws Exception {listaProdutos.remove(codigo);}
-
+    public void removeProduto(int codigo) throws Exception {
+        Produto p = getProduto(codigo);
+        if(p != null) {
+            listaProdutos.remove(p);
+        }else {
+            throw new Exception("Produto não existe!");
+        }
+    }
     @Override
     public Produto getProduto(int codigo) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo().equals(codigo))
+            if (p.getCodigo() == codigo)
                 return p;
         return null;
     }
@@ -28,29 +34,33 @@ public class CadProduto implements IProdutos {
     @Override
     public void updateQuantidade(int codigo, double nova) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo().equals(codigo))
+        if (p.getCodigo() == codigo){
                 p.setQuantidade(nova);
+        }
     }
 
     @Override
     public void updatePreco(int codigo, double novo) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo().equals(codigo))
+            if (p.getCodigo() == codigo){
                 p.setPreco(novo);
+        }
     }
 
     @Override
     public void addQuantidade(int codigo, double quantidade) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo().equals(codigo))
+        if (p.getCodigo() == codigo){
                 p.setQuantidade(p.getQuantidade() + quantidade);
+        }
     }
 
     @Override
     public void subQuantidade(int codigo, double quantidade) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo().equals(codigo))
+            if (p.getCodigo() == codigo){
                 p.setQuantidade(p.getQuantidade() - quantidade);
+        }
     }
 
 }
