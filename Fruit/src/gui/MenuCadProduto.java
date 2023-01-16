@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Cursor;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -45,9 +46,10 @@ public class MenuCadProduto extends JFrame {
 		// Campos de texto abaixo ->
 
 		try {
-			MaskFormatter mf = new MaskFormatter("#########");
+			MaskFormatter mf = new MaskFormatter("##");
 			textCodigo = new JFormattedTextField(mf);
-			textCodigo.setBounds(273, 94, 171, 20);
+			textCodigo.setFont(new Font("Arial", Font.PLAIN, 25));
+			textCodigo.setBounds(273, 91, 171, 29);
 			contentPane.add(textCodigo);
 			textCodigo.setColumns(10);
 		} catch (ParseException e) {
@@ -55,20 +57,20 @@ public class MenuCadProduto extends JFrame {
 		}
 
 		textNome = new JTextField();
-		textNome.setBounds(273, 154, 171, 20);
+		textNome.setBounds(273, 149, 171, 29);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
 		
 		textDescricao = new JTextField();
-		textDescricao.setBounds(273, 226, 171, 20);
+		textDescricao.setBounds(273, 221, 171, 29);
 		contentPane.add(textDescricao);
 		textDescricao.setColumns(10);
 
 		try{
 			MaskFormatter mf = new MaskFormatter("###.##");
 			textPreco = new JFormattedTextField(mf);
-			textPreco.setBounds(273, 304, 171, 20);
+			textPreco.setBounds(273, 296, 171, 29);
 			contentPane.add(textPreco);
 			textPreco.setColumns(10);
 		}catch(ParseException e){
@@ -77,7 +79,7 @@ public class MenuCadProduto extends JFrame {
 
 		
 		textQuantidade = new JTextField();
-		textQuantidade.setBounds(273, 377, 171, 20);
+		textQuantidade.setBounds(273, 368, 171, 29);
 		contentPane.add(textQuantidade);
 		textQuantidade.setColumns(10);
 
