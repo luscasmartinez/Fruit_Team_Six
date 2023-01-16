@@ -2,7 +2,7 @@ package App;
 
 import java.awt.EventQueue;
 
-import GUI.MenuInicial;
+import gui.MenuInicial;
 
 public class App {
     /**

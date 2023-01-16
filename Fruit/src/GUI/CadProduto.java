@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.Cursor;
 import java.awt.EventQueue;
@@ -110,6 +110,26 @@ public class CadProduto extends JFrame {
 		btnConfirmarCadastro.setBorderPainted(false);
 		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
 		contentPane.add(btnConfirmarCadastro);
+
+		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnConfirmarCadastro.setContentAreaFilled(false);
+		btnConfirmarCadastro.setBorderPainted(false);
+		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
+		contentPane.add(btnConfirmarCadastro);
+		
+		JButton btnVoltar = new JButton("");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+			}
+		});
+		btnVoltar.setBorder(null);
+		btnVoltar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnVoltar.setDefaultCapable(false);
+		btnVoltar.setContentAreaFilled(false);
+		btnVoltar.setBorderPainted(false);
+		btnVoltar.setBounds(438, 11, 89, 52);
+		contentPane.add(btnVoltar);
 
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuCadastro.png"));
