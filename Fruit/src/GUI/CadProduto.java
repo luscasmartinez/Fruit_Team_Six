@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import construtores.Produto;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
@@ -112,9 +115,20 @@ public class CadProduto extends JFrame {
 				btnQuantidade.setSelected(false);}
 		});
 		
+		//Botão de cadastro
+
 		JButton btnConfirmarCadastro = new JButton("");
 		btnConfirmarCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Produto novoProduto = new Produto(textNome.getText(), 
+
+				textDescricao.getText(),
+				Integer.parseInt(textCodigo.getText()),
+				Double.parseDouble(textQuantidade.getText()),
+				Double.parseDouble(textPreco.getText()));
+
+
+
 				setVisible(false);
 			}
 		});
