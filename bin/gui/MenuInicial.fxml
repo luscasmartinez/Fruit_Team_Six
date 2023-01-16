@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuInicial">
+   <children>
+      <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="600.0" prefWidth="550.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="600.0">
+               <image>
+                  <Image url="@../img/MenuInicial.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="76.0" layoutY="270.0" mnemonicParsing="false" onAction="#btCadastrar" prefHeight="61.0" prefWidth="209.0" text="CADASTRAR">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="328.0" layoutY="270.0" mnemonicParsing="false" onAction="#btVender" prefHeight="61.0" prefWidth="209.0" text="VENDER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+            <Button layoutX="76.0" layoutY="368.0" mnemonicParsing="false" onAction="#btNotas" prefHeight="61.0" prefWidth="209.0" text="NOTAS">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
