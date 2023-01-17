@@ -12,4 +12,8 @@ public class Item {
         this.produto = produto;
     }
 
+    @Override
+    public String toString() {
+        return "Item [produto=" + produto + "]";
+    }
 }

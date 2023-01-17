@@ -1,6 +1,6 @@
 package cadastros;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import construtores.Item;
 import construtores.NotaFiscal;
@@ -8,10 +8,10 @@ import interfaces.INotasFiscais;
 
 public class CadNotaFiscal implements INotasFiscais{
 
-    private LinkedList<NotaFiscal> listaNotaFiscal;
+    private ArrayList<NotaFiscal> listaNotaFiscal;
 
     public CadNotaFiscal() {
-        listaNotaFiscal = new LinkedList<NotaFiscal>();
+        listaNotaFiscal = new ArrayList<NotaFiscal>();
     }
 
     @Override
@@ -48,6 +48,4 @@ public class CadNotaFiscal implements INotasFiscais{
         // TODO Auto-generated method stub
         
     }
-
-
 }

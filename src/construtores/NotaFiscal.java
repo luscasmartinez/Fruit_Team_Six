@@ -31,4 +31,10 @@ public class NotaFiscal {
         this.item = item;
     }
 
+    @Override
+    public String toString() {
+        return "NotaFiscal: " + codigo +
+                ", Emissão: " + dataEmissao +
+                ", Item: " + item + "]";
+    }
 }
