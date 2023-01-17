@@ -34,6 +34,7 @@ public class App extends Application {
 
         ObservableList<Produto> produtoObs = FXCollections.observableArrayList();
         ObservableList<NotaFiscal> obsNotaFiscal = FXCollections.observableArrayList();
+        ObservableList<Produto> obsListaTemp = FXCollections.observableArrayList();
 
         MenuInicial controller = loader.getController();
 
@@ -44,6 +45,7 @@ public class App extends Application {
         // Listas Obs
         controller.setObsListaProduto(produtoObs);
         controller.setObsListaNotaFiscal(obsNotaFiscal);
+        controller.setobsListaTemp(obsListaTemp);
 
         primaryStage.setScene(scene);
         primaryStage.show();

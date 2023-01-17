@@ -26,6 +26,7 @@ public class MenuInicial {
 
     private static ObservableList<Produto> produtoObs;
     private static ObservableList<NotaFiscal> notaFiscalObs;
+    private static ObservableList<Produto> obsListaTemp;
 
 
     @FXML
@@ -85,6 +86,14 @@ public class MenuInicial {
 
     public void setObsListaNotaFiscal(ObservableList<NotaFiscal> notaFiscalObsNova) {
         notaFiscalObs = (ObservableList<NotaFiscal>) notaFiscalObsNova;
+    }
+
+    public static ObservableList<Produto> getObsListaTemp() {
+        return obsListaTemp;
+    }
+
+    public void setobsListaTemp(ObservableList<Produto> obsListaTempNova){
+        obsListaTemp = (ObservableList<Produto>) obsListaTempNova;
     }
 
 }

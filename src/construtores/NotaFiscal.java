@@ -7,6 +7,12 @@ public class NotaFiscal {
     private Date dataEmissao;
     private Item item;
 
+    public NotaFiscal (int codigo, Date dataEmissao, Item item){
+        this.codigo = codigo;
+        this.dataEmissao = dataEmissao;
+        this.item = item;
+    }
+
     public int getCodigo() {
         return this.codigo;
     }
