@@ -6,12 +6,15 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.concurrent.PriorityBlockingQueue;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -31,13 +34,14 @@ public class MenuCadProduto extends JFrame {
 	private JTextField textDescricao;
 	private JTextField textPreco;
 	private JTextField textQuantidade;
+	private JList <Produto>listProdutos;
 
 	/**
 	 * Cria a Janela.
 	 */
 	public MenuCadProduto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 553, 580);
+		setBounds(100, 100, 814, 580);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -81,6 +85,12 @@ public class MenuCadProduto extends JFrame {
 			e.printStackTrace();
 		}
 
+		listProdutos = new JList<Produto>();
+		DefaultListModel<Produto> model = new DefaultListModel<Produto>();
+		listProdutos.setModel(model);
+		listProdutos.setBounds(537, 0, 261, 540);
+		contentPane.add(listProdutos);
+
 		
 		textQuantidade = new JTextField();
 		textQuantidade.setBounds(273, 368, 171, 29);
@@ -122,42 +132,48 @@ public class MenuCadProduto extends JFrame {
 		JButton btnConfirmarCadastro = new JButton("");
 		btnConfirmarCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				if(btnKg.isSelected()){				
-					Produto novoProduto = new Produto(textNome.getText(),
-							textDescricao.getText(),
-							Integer.parseInt(textCodigo.getText()),
-							Double.parseDouble(textQuantidade.getText()),
-							Double.parseDouble(textPreco.getText()));
-							try {
-								novoCadProduto.addProduto(novoProduto);
-							} catch (Exception e1) {
-								e1.printStackTrace();
-							}
-							for(Produto p: novoCadProduto.listaProdutos){
-								System.out.println(p);
-							}
+				if (textCodigo.getText().isEmpty() || 
+				textDescricao.getText().isEmpty() || 
+				textNome.getText().isEmpty()|| 
+				textPreco.getText().isEmpty() || 
+				textQuantidade.getText().isEmpty()) {
 
-							
-						}else if(btnQuantidade.isSelected()){
-							Produto novoProduto = new Produto(textNome.getText(),
-							textDescricao.getText(),
-							Integer.parseInt(textCodigo.getText()),
-							Integer.parseInt(textQuantidade.getText()),
-							Double.parseDouble(textPreco.getText()));
-							try {
-								novoCadProduto.addProduto(novoProduto);
-							} catch (Exception e1) {
-								e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
+
+				}else if(btnKg.isSelected()){				
+						Produto novoProduto = new Produto(textNome.getText(),
+								textDescricao.getText(),
+								Integer.parseInt(textCodigo.getText()),
+								Double.parseDouble(textQuantidade.getText()),
+								Double.parseDouble(textPreco.getText()));
+								model.addElement(novoProduto);
+								try {
+									novoCadProduto.addProduto(novoProduto);
+								} catch (Exception e1) {
+									e1.printStackTrace();
+								}
+
+								
+							}else if(btnQuantidade.isSelected()){
+								Produto novoProduto = new Produto(textNome.getText(),
+								textDescricao.getText(),
+								Integer.parseInt(textCodigo.getText()),
+								Integer.parseInt(textQuantidade.getText()),
+								Double.parseDouble(textPreco.getText()));
+								model.addElement(novoProduto);
+								try {
+									novoCadProduto.addProduto(novoProduto);
+								} catch (Exception e1) {
+									e1.printStackTrace();
+								}
+								for(Produto p: novoCadProduto.listaProdutos){
+									System.out.println(p);
+								}
+							}else{
+								JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
 							}
-							for(Produto p: novoCadProduto.listaProdutos){
-								System.out.println(p);
-							}
-						}else{
-							JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
 						}
-			}
+			
 		});
 		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirmarCadastro.setContentAreaFilled(false);
@@ -189,5 +205,7 @@ public class MenuCadProduto extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuCadastro.png"));
 		lblNewLabel.setBounds(0, 0, 539, 540);
 		contentPane.add(lblNewLabel);
+
+		
 	}
 }
