@@ -2,7 +2,9 @@ package gui;
 
 import java.io.IOException;
 
+import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
+import construtores.NotaFiscal;
 import construtores.Produto;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +22,10 @@ public class MenuInicial {
     private Parent root;
 
     private static CadProduto listaProduto;
+    private static CadNotaFiscal listaNotaFiscal;
+
     private static ObservableList<Produto> produtoObs;
+    private static ObservableList<NotaFiscal> notaFiscalObs;
 
 
     @FXML
@@ -58,12 +63,28 @@ public class MenuInicial {
         listaProduto = listaProdutoNova;
     }
 
+    public static CadNotaFiscal getListaNotaFiscal() {
+        return listaNotaFiscal;
+    }
+
+    public void setListaNotaFiscal(CadNotaFiscal listaNotaFiscalNova) {
+        listaNotaFiscal = listaNotaFiscalNova;
+    }
+
     public static ObservableList<Produto> getObsListaProduto() {
         return produtoObs;
     }
-
+    
+    public static ObservableList<NotaFiscal> getObsListaNotaFiscal() {
+        return notaFiscalObs;
+    }
+    
     public void setObsListaProduto(ObservableList<Produto> produtoObsNova) {
         produtoObs = (ObservableList<Produto>) produtoObsNova;
+    }
+
+    public void setObsListaNotaFiscal(ObservableList<NotaFiscal> notaFiscalObsNova) {
+        notaFiscalObs = (ObservableList<NotaFiscal>) notaFiscalObsNova;
     }
 
 }

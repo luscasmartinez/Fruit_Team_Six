@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MenuVenda">
+   <children>
+      <AnchorPane prefHeight="600.0" prefWidth="600.0">
+         <children>
+            <ImageView fitHeight="600.0" fitWidth="600.0">
+               <image>
+                  <Image url="@../img/Layout.png" />
+               </image>
+            </ImageView>
+            <ChoiceBox fx:id="produtosChoiceBox" layoutX="29.0" layoutY="71.0" prefHeight="52.0" prefWidth="335.0" />
+            <ListView fx:id="listaProdutos" layoutX="379.0" layoutY="71.0" prefHeight="515.0" prefWidth="200.0" />
+            <Label fx:id="quantidadePossui" layoutX="148.0" layoutY="150.0" prefHeight="52.0" prefWidth="131.0" text="Quantidade" textAlignment="CENTER">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label layoutX="44.0" layoutY="157.0" prefHeight="37.0" prefWidth="94.0" text="Possui :">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="44.0" layoutY="194.0" prefHeight="37.0" prefWidth="104.0" text="Vender : ">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField layoutX="146.0" layoutY="195.0" prefHeight="37.0" prefWidth="150.0" />
+            <Button layoutX="44.0" layoutY="288.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="131.0" text="Adicionar a Nota" />
+            <Button layoutX="197.0" layoutY="288.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="131.0" text="Remover da Nota" />
+            <Button layoutX="120.0" layoutY="357.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="131.0" text="Finalizar Venda" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

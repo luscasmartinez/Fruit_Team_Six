@@ -3,7 +3,9 @@ package gui;
 import java.net.URL;
 import java.util.Optional;
 
+import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
+import construtores.NotaFiscal;
 import construtores.Produto;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -28,16 +30,20 @@ public class App extends Application {
         Scene scene = new Scene(parent);
 
         CadProduto listaProduto = new CadProduto();
+        CadNotaFiscal listaNotaFiscal = new CadNotaFiscal();
 
         ObservableList<Produto> produtoObs = FXCollections.observableArrayList();
+        ObservableList<NotaFiscal> obsNotaFiscal = FXCollections.observableArrayList();
 
         MenuInicial controller = loader.getController();
 
         // Listas comuns
         controller.setListaProduto(listaProduto);
+        controller.setListaNotaFiscal(listaNotaFiscal);
 
         // Listas Obs
         controller.setObsListaProduto(produtoObs);
+        controller.setObsListaNotaFiscal(obsNotaFiscal);
 
         primaryStage.setScene(scene);
         primaryStage.show();
