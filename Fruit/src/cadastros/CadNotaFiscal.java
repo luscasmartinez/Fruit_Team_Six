@@ -6,7 +6,7 @@ import construtores.Item;
 import construtores.NotaFiscal;
 import interfaces.INotasFiscais;
 
-public class CadNotaFiscal implements INotasFiscais{
+public class CadNotaFiscal implements INotasFiscais {
 
     private LinkedList<NotaFiscal> listaNotaFiscal;
 
@@ -16,7 +16,7 @@ public class CadNotaFiscal implements INotasFiscais{
 
     @Override
     public void addNotaFiscal(NotaFiscal nf) throws Exception {
-        listaNotaFiscal.add(nf);        
+        listaNotaFiscal.add(nf);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CadNotaFiscal implements INotasFiscais{
     @Override
     public NotaFiscal getNotaFiscal(int codigo) throws Exception {
         for (NotaFiscal nf : listaNotaFiscal)
-                return nf;
+            return nf;
         return null;
     }
 
@@ -40,14 +40,13 @@ public class CadNotaFiscal implements INotasFiscais{
     @Override
     public void addItem(int codigo, Item item) throws Exception {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void removeItem(int codigo, Item item) throws Exception {
         // TODO Auto-generated method stub
-        
-    }
 
+    }
 
 }

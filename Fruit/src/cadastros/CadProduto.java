@@ -11,20 +11,25 @@ public class CadProduto implements IProdutos {
 
     public LinkedList<Produto> listaProdutos;
 
-    public CadProduto() {listaProdutos = new LinkedList<Produto>();}
+    public CadProduto() {
+        listaProdutos = new LinkedList<Produto>();
+    }
 
     @Override
-    public void addProduto(Produto p) throws Exception {listaProdutos.add(p);}
+    public void addProduto(Produto p) throws Exception {
+        listaProdutos.add(p);
+    }
 
     @Override
     public void removeProduto(int codigo) throws Exception {
         Produto p = getProduto(codigo);
-        if(p != null) {
+        if (p != null) {
             listaProdutos.remove(p);
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Produto não encontrado");
         }
     }
+
     @Override
     public Produto getProduto(int codigo) throws Exception {
         for (Produto p : listaProdutos)
@@ -36,33 +41,32 @@ public class CadProduto implements IProdutos {
     @Override
     public void updateQuantidade(int codigo, double nova) throws Exception {
         for (Produto p : listaProdutos)
-        if (p.getCodigo() == codigo){
+            if (p.getCodigo() == codigo) {
                 p.setQuantidade(nova);
-        }
+            }
     }
 
     @Override
     public void updatePreco(int codigo, double novo) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo() == codigo){
+            if (p.getCodigo() == codigo) {
                 p.setPreco(novo);
-        }
+            }
     }
 
     @Override
     public void addQuantidade(int codigo, double quantidade) throws Exception {
         for (Produto p : listaProdutos)
-        if (p.getCodigo() == codigo){
+            if (p.getCodigo() == codigo) {
                 p.setQuantidade(p.getQuantidade() + quantidade);
-        }
+            }
     }
 
     @Override
     public void subQuantidade(int codigo, double quantidade) throws Exception {
         for (Produto p : listaProdutos)
-            if (p.getCodigo() == codigo){
+            if (p.getCodigo() == codigo) {
                 p.setQuantidade(p.getQuantidade() - quantidade);
-        }
+            }
     }
-
 }

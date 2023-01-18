@@ -1,16 +1,14 @@
 package cadastros;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import construtores.Item;
 
 public class CadItem {
-    private ArrayList<Item> itemList;
+  private LinkedList<Item> itemList;
 
-
-  public CadItem(){
-    itemList = new ArrayList<Item>();
+  public CadItem() {
+    itemList = new LinkedList<Item>();
   }
-    
+
 }

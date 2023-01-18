@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,15 +11,23 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import cadastros.CadProduto;
+
 public class MenuInicial extends JFrame {
 
 	private JPanel contentPane;
 
+	CadProduto listaProdutos = new CadProduto();
+
+	private MenuCadProduto cadProduto;
+
 	/**
-	 * spo
+	 * 
 	 * Create the frame.
 	 */
 	public MenuInicial() {
+
+		cadProduto = new MenuCadProduto(listaProdutos); 
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);
@@ -35,7 +42,6 @@ public class MenuInicial extends JFrame {
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Evento aqui
-				MenuCadProduto cadProduto = new MenuCadProduto();
 				cadProduto.setVisible(true);
 			}
 		});

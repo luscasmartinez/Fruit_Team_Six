@@ -1,12 +1,10 @@
 package gui;
 
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.util.concurrent.PriorityBlockingQueue;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -27,19 +25,22 @@ import construtores.Produto;
 
 public class MenuCadProduto extends JFrame {
 
-	CadProduto novoCadProduto = new CadProduto();
+	private CadProduto listaProdutos;
+
 	private JPanel contentPane;
 	private JTextField textCodigo;
 	private JTextField textNome;
 	private JTextField textDescricao;
 	private JTextField textPreco;
 	private JTextField textQuantidade;
-	private JList <Produto>listProdutos;
+	private JList<Produto> listProdutos;
 
 	/**
 	 * Cria a Janela.
 	 */
-	public MenuCadProduto() {
+	public MenuCadProduto(CadProduto listaProdutos) {
+		this.listaProdutos = listaProdutos;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 814, 580);
 		contentPane = new JPanel();
@@ -67,21 +68,20 @@ public class MenuCadProduto extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
-		
 		textDescricao = new JTextField();
 		textDescricao.setFont(new Font("Arial", Font.PLAIN, 25));
 		textDescricao.setBounds(273, 221, 171, 29);
 		contentPane.add(textDescricao);
 		textDescricao.setColumns(10);
 
-		try{
+		try {
 			MaskFormatter mf = new MaskFormatter("##.##");
 			textPreco = new JFormattedTextField(mf);
 			textPreco.setFont(new Font("Arial", Font.PLAIN, 25));
 			textPreco.setBounds(273, 296, 171, 29);
 			contentPane.add(textPreco);
 			textPreco.setColumns(10);
-		}catch(ParseException e){
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 
@@ -91,7 +91,6 @@ public class MenuCadProduto extends JFrame {
 		listProdutos.setBounds(537, 0, 261, 540);
 		contentPane.add(listProdutos);
 
-		
 		textQuantidade = new JTextField();
 		textQuantidade.setBounds(273, 368, 171, 29);
 		textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -125,55 +124,55 @@ public class MenuCadProduto extends JFrame {
 			}
 		});
 
-			
-
 		// Botão de cadastro
 
 		JButton btnConfirmarCadastro = new JButton("");
 		btnConfirmarCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (textCodigo.getText().isEmpty() || 
-				textDescricao.getText().isEmpty() || 
-				textNome.getText().isEmpty()|| 
-				textPreco.getText().isEmpty() || 
-				textQuantidade.getText().isEmpty()) {
+				if (textCodigo.getText().isEmpty() ||
+						textDescricao.getText().isEmpty() ||
+						textNome.getText().isEmpty() ||
+						textPreco.getText().isEmpty() ||
+						textQuantidade.getText().isEmpty()) {
 
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 
-				}else if(btnKg.isSelected()){				
-						Produto novoProduto = new Produto(textNome.getText(),
-								textDescricao.getText(),
-								Integer.parseInt(textCodigo.getText()),
-								Double.parseDouble(textQuantidade.getText()),
-								Double.parseDouble(textPreco.getText()));
-								model.addElement(novoProduto);
-								try {
-									novoCadProduto.addProduto(novoProduto);
-								} catch (Exception e1) {
-									e1.printStackTrace();
-								}
+				} else if (btnKg.isSelected()) {
+					Produto novoProduto = new Produto(textNome.getText(),
+							textDescricao.getText(),
+							Integer.parseInt(textCodigo.getText()),
+							Double.parseDouble(textQuantidade.getText()),
+							Double.parseDouble(textPreco.getText()));
+							
+					model.addElement(novoProduto);
 
-								
-							}else if(btnQuantidade.isSelected()){
-								Produto novoProduto = new Produto(textNome.getText(),
-								textDescricao.getText(),
-								Integer.parseInt(textCodigo.getText()),
-								Integer.parseInt(textQuantidade.getText()),
-								Double.parseDouble(textPreco.getText()));
-								model.addElement(novoProduto);
-								try {
-									novoCadProduto.addProduto(novoProduto);
-								} catch (Exception e1) {
-									e1.printStackTrace();
-								}
-								for(Produto p: novoCadProduto.listaProdutos){
-									System.out.println(p);
-								}
-							}else{
-								JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
-							}
-						}
-			
+					try {
+						listaProdutos.addProduto(novoProduto);
+					} catch (Exception e1) {
+						System.out.println("Ocorreu o erro: " + e1);
+						e1.printStackTrace();
+					}
+
+				} else if (btnQuantidade.isSelected()) {
+					Produto novoProduto = new Produto(textNome.getText(),
+							textDescricao.getText(),
+							Integer.parseInt(textCodigo.getText()),
+							Integer.parseInt(textQuantidade.getText()),
+							Double.parseDouble(textPreco.getText()));
+					model.addElement(novoProduto);
+					try {
+						listaProdutos.addProduto(novoProduto);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					for (Produto p : listaProdutos.listaProdutos) {
+						System.out.println(p);
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
+				}
+			}
+
 		});
 		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnConfirmarCadastro.setContentAreaFilled(false);
@@ -186,7 +185,7 @@ public class MenuCadProduto extends JFrame {
 		btnConfirmarCadastro.setBorderPainted(false);
 		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
 		contentPane.add(btnConfirmarCadastro);
-		
+
 		JButton btnVoltar = new JButton("");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -206,6 +205,5 @@ public class MenuCadProduto extends JFrame {
 		lblNewLabel.setBounds(0, 0, 539, 540);
 		contentPane.add(lblNewLabel);
 
-		
 	}
 }
