@@ -19,6 +19,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
+import javax.xml.crypto.MarshalException;
 
 import cadastros.CadProduto;
 import construtores.Produto;
@@ -26,7 +27,7 @@ import construtores.Produto;
 public class MenuCadProduto extends JFrame {
 
 	private CadProduto listaProdutos;
-
+	private static int cod = 1;
 	private JPanel contentPane;
 	private JTextField textCodigo;
 	private JTextField textNome;
@@ -51,16 +52,14 @@ public class MenuCadProduto extends JFrame {
 
 		// Campos de texto abaixo ->
 
-		try {
-			MaskFormatter mf = new MaskFormatter("##");
-			textCodigo = new JFormattedTextField(mf);
-			textCodigo.setFont(new Font("Arial", Font.PLAIN, 25));
-			textCodigo.setBounds(273, 91, 171, 29);
-			contentPane.add(textCodigo);
-			textCodigo.setColumns(10);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		textCodigo = new JTextField();
+		textCodigo.setEditable(false);
+		textCodigo.setText(Integer.toString(cod));
+
+		textCodigo.setFont(new Font("Arial", Font.PLAIN, 25));
+		textCodigo.setBounds(273, 91, 171, 29);
+		contentPane.add(textCodigo);
+		textCodigo.setColumns(10);
 
 		textNome = new JTextField();
 		textNome.setFont(new Font("Arial", Font.PLAIN, 25));
@@ -81,8 +80,8 @@ public class MenuCadProduto extends JFrame {
 			textPreco.setBounds(273, 296, 171, 29);
 			contentPane.add(textPreco);
 			textPreco.setColumns(10);
-		} catch (ParseException e) {
-			e.printStackTrace();
+		} catch (ParseException | NumberFormatException e ) {
+			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 		}
 
 		listProdutos = new JList<Produto>();
@@ -91,11 +90,17 @@ public class MenuCadProduto extends JFrame {
 		listProdutos.setBounds(537, 0, 261, 540);
 		contentPane.add(listProdutos);
 
-		textQuantidade = new JTextField();
-		textQuantidade.setBounds(273, 368, 171, 29);
-		textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
-		contentPane.add(textQuantidade);
-		textQuantidade.setColumns(10);
+		try {
+			MaskFormatter mf = new MaskFormatter("######");
+			textQuantidade = new JFormattedTextField(mf);
+			textQuantidade.setBounds(273, 368, 171, 29);
+			textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
+			contentPane.add(textQuantidade);
+			textQuantidade.setColumns(10);
+		} catch (ParseException | NumberFormatException e ) {
+			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
+			
+		}
 
 		// <- Fim dos campo de texto
 
@@ -132,19 +137,18 @@ public class MenuCadProduto extends JFrame {
 				if (textCodigo.getText().isEmpty() ||
 						textDescricao.getText().isEmpty() ||
 						textNome.getText().isEmpty() ||
-						textPreco.getText().isEmpty() ||
-						textQuantidade.getText().isEmpty()) {
+						textPreco.getText().equals("  .  ") ||
+						textQuantidade.getText().equals("      ") ) {
 
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 
 				} else if (btnKg.isSelected()) {
 					Produto novoProduto = new Produto(textNome.getText(),
 							textDescricao.getText(),
-							Integer.parseInt(textCodigo.getText()),
+							cod,
 							Double.parseDouble(textQuantidade.getText()),
 							Double.parseDouble(textPreco.getText()));
-							
-					model.addElement(novoProduto);
+					cod++;
 
 					try {
 						listaProdutos.addProduto(novoProduto);
@@ -152,25 +156,44 @@ public class MenuCadProduto extends JFrame {
 						System.out.println("Ocorreu o erro: " + e1);
 						e1.printStackTrace();
 					}
-
+					for (Produto p : listaProdutos.listaProdutos) {
+						if (p.getCodigo() == cod - 1)
+							model.addElement(p);
+					}
+					textCodigo.setText(Integer.toString(cod));
+					textDescricao.setText("");
+					textNome.setText("");
+					textPreco.setText("");
+					textQuantidade.setText("");
+					textNome.requestFocus();
 				} else if (btnQuantidade.isSelected()) {
 					Produto novoProduto = new Produto(textNome.getText(),
 							textDescricao.getText(),
-							Integer.parseInt(textCodigo.getText()),
+							cod,
 							Integer.parseInt(textQuantidade.getText()),
 							Double.parseDouble(textPreco.getText()));
-					model.addElement(novoProduto);
+					cod++;
+
 					try {
 						listaProdutos.addProduto(novoProduto);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 					for (Produto p : listaProdutos.listaProdutos) {
-						System.out.println(p);
+						if (p.getCodigo() == cod - 1)
+							model.addElement(p);
 					}
+					textCodigo.setText(Integer.toString(cod));
+					textDescricao.setText("");
+					textNome.setText("");
+					textPreco.setText("");
+					textQuantidade.setText("");
+					textNome.requestFocus();
 				} else {
+
 					JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
 				}
+
 			}
 
 		});
