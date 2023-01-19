@@ -19,7 +19,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
-import javax.xml.crypto.MarshalException;
 
 import cadastros.CadProduto;
 import construtores.Produto;
@@ -27,6 +26,7 @@ import construtores.Produto;
 public class MenuCadProduto extends JFrame {
 
 	private CadProduto listaProdutos;
+	
 	private static int cod = 1;
 	private JPanel contentPane;
 	private JTextField textCodigo;

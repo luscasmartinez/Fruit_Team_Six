@@ -19,7 +19,8 @@ public class MenuInicial extends JFrame {
 
 	CadProduto listaProdutos = new CadProduto();
 
-	private MenuCadProduto cadProduto;
+	private MenuCadProduto menucadProduto;
+	private MenuVenda menuVenda;
 
 	/**
 	 * 
@@ -27,7 +28,8 @@ public class MenuInicial extends JFrame {
 	 */
 	public MenuInicial() {
 
-		cadProduto = new MenuCadProduto(listaProdutos); 
+		menucadProduto = new MenuCadProduto(listaProdutos); 
+		menuVenda = new MenuVenda(listaProdutos);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);
@@ -42,7 +44,7 @@ public class MenuInicial extends JFrame {
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Evento aqui
-				cadProduto.setVisible(true);
+				menucadProduto.setVisible(true);
 			}
 		});
 		btnCadastro.setContentAreaFilled(false);
@@ -53,7 +55,8 @@ public class MenuInicial extends JFrame {
 		JButton btnCompra = new JButton("");
 		btnCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				
+				menuVenda.setVisible(true);
 				// Evento aqui
 			}
 

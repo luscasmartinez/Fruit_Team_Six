@@ -69,4 +69,9 @@ public class CadProduto implements IProdutos {
                 p.setQuantidade(p.getQuantidade() - quantidade);
             }
     }
+
+    @Override
+    public String toString() {
+        return "" + listaProdutos;
+    }    
 }
