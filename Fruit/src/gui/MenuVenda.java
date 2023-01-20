@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -81,11 +82,14 @@ public class MenuVenda extends JFrame {
         textPane.setBounds(330, 229, 180, 38);
         contentPane.add(textPane);
         textPane.setEditable(false);
+        comboProdutos.getSelectedItem();
 
-        
+
+
+        /* 
         Produto p = (Produto) comboProdutos.getSelectedItem();
         textPane.setText("" + p.getQuantidade());
-
+ */
         // textQtdAtual = String.valueOf(p.getQuantidade());
 
         textQtdPedido = new JTextField();
@@ -93,7 +97,7 @@ public class MenuVenda extends JFrame {
         textQtdPedido.setBounds(330, 328, 180, 38);
         contentPane.add(textQtdPedido);
         textQtdPedido.setColumns(10);
-
+        
 
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(new ActionListener() {

@@ -72,7 +72,8 @@ public class MenuInicial extends JFrame {
 		JButton btnNotas = new JButton("");
 		btnNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				MenuNota menuNotas = new MenuNota();
+				menuNotas.setVisible(true);
 				// Evento aqui
 			}
 		});
