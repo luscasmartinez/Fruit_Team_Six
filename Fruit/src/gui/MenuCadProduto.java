@@ -26,7 +26,7 @@ import construtores.Produto;
 public class MenuCadProduto extends JFrame {
 
 	private CadProduto listaProdutos;
-	
+
 	private static int cod = 1;
 	private JPanel contentPane;
 	private JTextField textCodigo;
@@ -80,7 +80,7 @@ public class MenuCadProduto extends JFrame {
 			textPreco.setBounds(273, 296, 171, 29);
 			contentPane.add(textPreco);
 			textPreco.setColumns(10);
-		} catch (ParseException | NumberFormatException e ) {
+		} catch (ParseException | NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 		}
 
@@ -91,15 +91,15 @@ public class MenuCadProduto extends JFrame {
 		contentPane.add(listProdutos);
 
 		try {
-			//MaskFormatter mf = new MaskFormatter("######");
-			textQuantidade = new JFormattedTextField();
+			// MaskFormatter mf = new MaskFormatter("######");
+			textQuantidade = new JTextField();
 			textQuantidade.setBounds(273, 368, 171, 29);
 			textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
 			contentPane.add(textQuantidade);
 			textQuantidade.setColumns(10);
-		} catch (NumberFormatException e ) {
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
-			
+
 		}
 
 		// <- Fim dos campo de texto
@@ -138,57 +138,63 @@ public class MenuCadProduto extends JFrame {
 						textDescricao.getText().isEmpty() ||
 						textNome.getText().isEmpty() ||
 						textPreco.getText().equals("  .  ") ||
-						textQuantidade.getText().equals("      ") ) {
+						textQuantidade.getText().equals("      ")) {
 
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 
 				} else if (btnKg.isSelected()) {
-					Produto novoProduto = new Produto(textNome.getText(),
-							textDescricao.getText(),
-							cod,
-							Double.parseDouble(textQuantidade.getText()),
-							Double.parseDouble(textPreco.getText()));
-					cod++;
-
 					try {
+						Produto novoProduto = new Produto(textNome.getText(),
+								textDescricao.getText(),
+								cod,
+								Double.parseDouble(textQuantidade.getText()),
+								Double.parseDouble(textPreco.getText()));
+						cod++;
 						listaProdutos.addProduto(novoProduto);
-					} catch (Exception e1) {
-						System.out.println("Ocorreu o erro: " + e1);
-						e1.printStackTrace();
+
+						textCodigo.setText(Integer.toString(cod));
+						textDescricao.setText("");
+						textNome.setText("");
+						textPreco.setText("");
+						textQuantidade.setText("");
+						textNome.requestFocus();
+
+
+					} catch (Exception e3) {
+						JOptionPane.showMessageDialog(null, "Por favor, utilize \n apenas numeros na quantidade");
 					}
+
 					for (Produto p : listaProdutos.listaProdutos) {
 						if (p.getCodigo() == cod - 1)
 							model.addElement(p);
 					}
-					textCodigo.setText(Integer.toString(cod));
-					textDescricao.setText("");
-					textNome.setText("");
-					textPreco.setText("");
-					textQuantidade.setText("");
-					textNome.requestFocus();
+					
 				} else if (btnQuantidade.isSelected()) {
-					Produto novoProduto = new Produto(textNome.getText(),
-							textDescricao.getText(),
-							cod,
-							Integer.parseInt(textQuantidade.getText()),
-							Double.parseDouble(textPreco.getText()));
-					cod++;
-
 					try {
+						Produto novoProduto = new Produto(textNome.getText(),
+								textDescricao.getText(),
+								cod,
+								Integer.parseInt(textQuantidade.getText()),
+								Double.parseDouble(textPreco.getText()));
+						cod++;
 						listaProdutos.addProduto(novoProduto);
-					} catch (Exception e1) {
-						e1.printStackTrace();
+
+						textCodigo.setText(Integer.toString(cod));
+						textDescricao.setText("");
+						textNome.setText("");
+						textPreco.setText("");
+						textQuantidade.setText("");
+						textNome.requestFocus();
+
+					} catch (Exception e4) {
+						JOptionPane.showMessageDialog(null, "Por favor, utilize \n apenas numeros na quantidade");
 					}
+
 					for (Produto p : listaProdutos.listaProdutos) {
 						if (p.getCodigo() == cod - 1)
 							model.addElement(p);
 					}
-					textCodigo.setText(Integer.toString(cod));
-					textDescricao.setText("");
-					textNome.setText("");
-					textPreco.setText("");
-					textQuantidade.setText("");
-					textNome.requestFocus();
+
 				} else {
 
 					JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
