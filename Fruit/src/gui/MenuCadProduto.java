@@ -91,13 +91,13 @@ public class MenuCadProduto extends JFrame {
 		contentPane.add(listProdutos);
 
 		try {
-			MaskFormatter mf = new MaskFormatter("######");
-			textQuantidade = new JFormattedTextField(mf);
+			//MaskFormatter mf = new MaskFormatter("######");
+			textQuantidade = new JFormattedTextField();
 			textQuantidade.setBounds(273, 368, 171, 29);
 			textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
 			contentPane.add(textQuantidade);
 			textQuantidade.setColumns(10);
-		} catch (ParseException | NumberFormatException e ) {
+		} catch (NumberFormatException e ) {
 			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 			
 		}
