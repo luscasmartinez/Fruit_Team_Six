@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
 
 public class MenuInicial extends JFrame {
@@ -18,9 +19,11 @@ public class MenuInicial extends JFrame {
 	private JPanel contentPane;
 
 	CadProduto listaProdutos = new CadProduto();
+	CadNotaFiscal listaNotaFiscal = new CadNotaFiscal();
 
 	private MenuCadProduto menucadProduto;
 	private MenuVenda menuVenda;
+	private MenuNota menuNotas;
 
 	/**
 	 * 
@@ -30,6 +33,7 @@ public class MenuInicial extends JFrame {
 
 		menucadProduto = new MenuCadProduto(listaProdutos); 
 		menuVenda = new MenuVenda(listaProdutos);
+		menuNotas = new MenuNota(listaNotaFiscal);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);
@@ -55,7 +59,6 @@ public class MenuInicial extends JFrame {
 		JButton btnCompra = new JButton("");
 		btnCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				menuVenda.setVisible(true);
 				// Evento aqui
 			}
@@ -72,7 +75,7 @@ public class MenuInicial extends JFrame {
 		JButton btnNotas = new JButton("");
 		btnNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuNota menuNotas = new MenuNota();
+				
 				menuNotas.setVisible(true);
 				// Evento aqui
 			}

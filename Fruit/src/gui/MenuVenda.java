@@ -4,7 +4,6 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -18,7 +17,6 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadProduto;
-import construtores.Produto;
 
 public class MenuVenda extends JFrame {
 
@@ -110,7 +108,7 @@ public class MenuVenda extends JFrame {
 
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setIcon(new ImageIcon(
-                "C:\\Users\\Lucas.LUSCA\\Downloads\\Yellow Mint Minimalist Fruit Instagram Post  (2).png"));
+                "Fruit\\src\\img\\MenuCadastro.png"));
         lblNewLabel.setBounds(0, 0, 544, 512);
         contentPane.add(lblNewLabel);
 

@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import cadastros.CadNotaFiscal;
+
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,11 +22,14 @@ public class MenuNota extends JFrame {
 
 	private JPanel contentPane;
 
+	private CadNotaFiscal listaNotaFiscal;
 
 	/**
 	 * Create the frame.
 	 */
-	public MenuNota() {
+	public MenuNota(CadNotaFiscal listaNotaFiscal) {
+		this.listaNotaFiscal = listaNotaFiscal;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1018, 642);
 		contentPane = new JPanel();
