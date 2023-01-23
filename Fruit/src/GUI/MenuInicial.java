@@ -31,10 +31,6 @@ public class MenuInicial extends JFrame {
 	 */
 	public MenuInicial() {
 
-		menucadProduto = new MenuCadProduto(listaProdutos); 
-		menuVenda = new MenuVenda(listaProdutos);
-		menuNotas = new MenuNota(listaNotaFiscal);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);
 		contentPane = new JPanel();
@@ -48,6 +44,8 @@ public class MenuInicial extends JFrame {
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Evento aqui
+
+				menucadProduto = new MenuCadProduto(listaProdutos);
 				menucadProduto.setVisible(true);
 			}
 		});
@@ -59,6 +57,7 @@ public class MenuInicial extends JFrame {
 		JButton btnCompra = new JButton("");
 		btnCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				menuVenda = new MenuVenda(listaProdutos);
 				menuVenda.setVisible(true);
 				// Evento aqui
 			}
@@ -75,7 +74,7 @@ public class MenuInicial extends JFrame {
 		JButton btnNotas = new JButton("");
 		btnNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				menuNotas = new MenuNota(listaNotaFiscal);
 				menuNotas.setVisible(true);
 				// Evento aqui
 			}
