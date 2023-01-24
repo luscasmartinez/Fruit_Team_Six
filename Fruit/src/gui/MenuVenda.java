@@ -75,6 +75,7 @@ public class MenuVenda extends JFrame {
         comboProdutos.setBounds(193, 93, 318, 41);
         contentPane.add(comboProdutos);
         comboProdutos.addItem(listaProdutos);
+        
 
         JTextPane textPane = new JTextPane();
         textPane.setBounds(330, 229, 180, 38);
