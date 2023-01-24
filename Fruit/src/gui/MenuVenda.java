@@ -77,24 +77,28 @@ public class MenuVenda extends JFrame {
         comboProdutos.setBounds(193, 93, 318, 41);
 
         String[] produtos = listaProdutos.getProdutos();
-        
+
         for (String p : produtos) {
             comboProdutos.addItem(p);
             System.out.println(p);
         }
         contentPane.add(comboProdutos);
 
-        JTextPane textPane = new JTextPane();
-        textPane.setBounds(330, 229, 180, 38);
-        contentPane.add(textPane);
-        textPane.setEditable(false);
-        comboProdutos.getSelectedItem();
+        JTextPane qtdAtual = new JTextPane();
+        qtdAtual.setBounds(330, 229, 180, 38);
+        contentPane.add(qtdAtual);
+        qtdAtual.setEditable(false);
 
-        /*
-         * Produto p = (Produto) comboProdutos.getSelectedItem();
-         * textPane.setText("" + p.getQuantidade());
-         */
-        // textQtdAtual = String.valueOf(p.getQuantidade());
+        comboProdutos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // código a ser executado quando o usuário selecionar um item na combobox
+                try {
+                    Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex()+1);
+                    qtdAtual.setText(p.getQuantidade() + "");
+                } catch (Exception e1) {
+                }
+            }
+        });
 
         textQtdPedido = new JTextField();
         textQtdPedido.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -108,12 +112,13 @@ public class MenuVenda extends JFrame {
                 setVisible(false);
             }
         });
+
         btnVoltar.setBounds(423, 11, 89, 23);
         contentPane.add(btnVoltar);
 
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setIcon(new ImageIcon(
-                "Fruit\\src\\img\\MenuCadastro.png"));
+                "Fruit\\src\\img\\MenuVenda.png"));
         lblNewLabel.setBounds(0, 0, 544, 512);
         contentPane.add(lblNewLabel);
 

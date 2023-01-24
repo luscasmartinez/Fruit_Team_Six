@@ -31,6 +31,8 @@ public class MenuInicial extends JFrame {
 	 */
 	public MenuInicial() {
 
+		menucadProduto = new MenuCadProduto(listaProdutos);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);
 		contentPane = new JPanel();
@@ -44,8 +46,6 @@ public class MenuInicial extends JFrame {
 		btnCadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Evento aqui
-
-				menucadProduto = new MenuCadProduto(listaProdutos);
 				menucadProduto.setVisible(true);
 			}
 		});
