@@ -17,7 +17,6 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadProduto;
-import construtores.Produto;
 
 public class MenuVenda extends JFrame {
 
@@ -71,8 +70,7 @@ public class MenuVenda extends JFrame {
 
         // Combo Box com produtos
 
-        System.out.println("Teste");
-        JComboBox<String> comboProdutos = new JComboBox();
+        JComboBox<CadProduto> comboProdutos = new JComboBox<CadProduto>();
         comboProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20));
         comboProdutos.setBounds(193, 93, 318, 41);
 
@@ -83,6 +81,8 @@ public class MenuVenda extends JFrame {
             System.out.println(p);
         }
         contentPane.add(comboProdutos);
+        comboProdutos.addItem(listaProdutos);
+        
 
         JTextPane qtdAtual = new JTextPane();
         qtdAtual.setBounds(330, 229, 180, 38);
@@ -105,6 +105,7 @@ public class MenuVenda extends JFrame {
         textQtdPedido.setBounds(330, 328, 180, 38);
         contentPane.add(textQtdPedido);
         textQtdPedido.setColumns(10);
+        
 
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(new ActionListener() {

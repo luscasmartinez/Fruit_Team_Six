@@ -2,6 +2,8 @@ package App;
 
 import java.awt.EventQueue;
 
+import construtores.Item;
+import construtores.Produto;
 import gui.MenuInicial;
 
 public class App {
@@ -14,6 +16,7 @@ public class App {
                 try {
                     MenuInicial frame = new MenuInicial();
                     frame.setVisible(true);
+               
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
