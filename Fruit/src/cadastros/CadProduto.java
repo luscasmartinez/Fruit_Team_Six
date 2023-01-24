@@ -70,6 +70,14 @@ public class CadProduto implements IProdutos {
             }
     }
 
+    public String[] getProdutos(){
+        String[] produtos = new String[listaProdutos.size()];
+        for (int i =0; i < listaProdutos.size() ; i++) {
+            produtos[i] = listaProdutos.get(i).toString();
+        }
+        return produtos;
+    }
+
     @Override
     public String toString() {
         return "" + listaProdutos;
