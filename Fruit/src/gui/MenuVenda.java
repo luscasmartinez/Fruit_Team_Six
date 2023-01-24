@@ -17,6 +17,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadProduto;
+import construtores.Produto;
 
 public class MenuVenda extends JFrame {
 
@@ -70,7 +71,7 @@ public class MenuVenda extends JFrame {
 
         // Combo Box com produtos
 
-        JComboBox<CadProduto> comboProdutos = new JComboBox<CadProduto>();
+        JComboBox<String> comboProdutos = new JComboBox();
         comboProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20));
         comboProdutos.setBounds(193, 93, 318, 41);
 
@@ -81,7 +82,6 @@ public class MenuVenda extends JFrame {
             System.out.println(p);
         }
         contentPane.add(comboProdutos);
-        comboProdutos.addItem(listaProdutos);
         
 
         JTextPane qtdAtual = new JTextPane();
@@ -96,6 +96,7 @@ public class MenuVenda extends JFrame {
                     Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex()+1);
                     qtdAtual.setText(p.getQuantidade() + "");
                 } catch (Exception e1) {
+                    
                 }
             }
         });
