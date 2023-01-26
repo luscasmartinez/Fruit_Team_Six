@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,6 +28,8 @@ public class MenuVenda extends JFrame {
     private JTextField textQtdAtual;
     private JTextField textQtdPedido;
 
+    private JList<Produto> list;
+
     /**
      * Create the frame.
      */
@@ -48,14 +51,6 @@ public class MenuVenda extends JFrame {
         btnFinalizar.setBorderPainted(false);
         btnFinalizar.setBounds(55, 433, 135, 41);
         contentPane.add(btnFinalizar);
-
-        JButton btnAddPedido = new JButton("");
-        btnAddPedido.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnAddPedido.setBorder(null);
-        btnAddPedido.setContentAreaFilled(false);
-        btnAddPedido.setBorderPainted(false);
-        btnAddPedido.setBounds(208, 432, 135, 40);
-        contentPane.add(btnAddPedido);
 
         JButton btnNotaFiscal = new JButton("");
         btnNotaFiscal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -82,7 +77,6 @@ public class MenuVenda extends JFrame {
             System.out.println(p);
         }
         contentPane.add(comboProdutos);
-        
 
         JTextPane qtdAtual = new JTextPane();
         qtdAtual.setBounds(330, 229, 180, 38);
@@ -93,10 +87,42 @@ public class MenuVenda extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // código a ser executado quando o usuário selecionar um item na combobox
                 try {
-                    Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex()+1);
+                    Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex() + 1);
                     qtdAtual.setText(p.getQuantidade() + "");
                 } catch (Exception e1) {
-                    
+
+                }
+            }
+        });
+
+        list = new JList<Produto>();
+        DefaultListModel<Produto> model = new DefaultListModel<Produto>();
+        list.setModel(model);
+        list.setBounds(540, 0, 346, 512);
+        contentPane.add(list);
+
+        JButton btnAddPedido = new JButton("");
+        btnAddPedido.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnAddPedido.setBorder(null);
+        btnAddPedido.setContentAreaFilled(false);
+        btnAddPedido.setBorderPainted(false);
+        btnAddPedido.setBounds(208, 432, 135, 40);
+        contentPane.add(btnAddPedido);
+        // Botão add pedido
+        btnAddPedido.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Ao clicar
+                try {
+                    Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex() + 1);
+
+                    listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
+
+                    if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
+                        model.addElement(p);
+                        qtdAtual.setText(p.getQuantidade() + "");
+                    }
+
+                } catch (Exception e1) {
                 }
             }
         });
@@ -106,7 +132,6 @@ public class MenuVenda extends JFrame {
         textQtdPedido.setBounds(330, 328, 180, 38);
         contentPane.add(textQtdPedido);
         textQtdPedido.setColumns(10);
-        
 
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(new ActionListener() {
@@ -123,9 +148,5 @@ public class MenuVenda extends JFrame {
                 "Fruit\\src\\img\\MenuVenda.png"));
         lblNewLabel.setBounds(0, 0, 544, 512);
         contentPane.add(lblNewLabel);
-
-        JList list = new JList();
-        list.setBounds(540, 0, 346, 512);
-        contentPane.add(list);
     }
 }

@@ -66,13 +66,17 @@ public class CadProduto implements IProdutos {
     public void subQuantidade(int codigo, double quantidade) throws Exception {
         for (Produto p : listaProdutos)
             if (p.getCodigo() == codigo) {
-                p.setQuantidade(p.getQuantidade() - quantidade);
+                if (p.getQuantidade() - quantidade < 0) {
+                    JOptionPane.showMessageDialog(null, "Quantidade atual insuficiente.");
+                } else {
+                    p.setQuantidade(p.getQuantidade() - quantidade);
+                }
             }
     }
 
-    public String[] getProdutos(){
+    public String[] getProdutos() {
         String[] produtos = new String[listaProdutos.size()];
-        for (int i =0; i < listaProdutos.size() ; i++) {
+        for (int i = 0; i < listaProdutos.size(); i++) {
             produtos[i] = listaProdutos.get(i).toString();
         }
         return produtos;
@@ -81,5 +85,5 @@ public class CadProduto implements IProdutos {
     @Override
     public String toString() {
         return "" + listaProdutos;
-    }    
+    }
 }

@@ -2,8 +2,6 @@ package App;
 
 import java.awt.EventQueue;
 
-import construtores.Item;
-import construtores.Produto;
 import gui.MenuInicial;
 
 public class App {
