@@ -111,7 +111,7 @@ public class MenuVenda extends JFrame {
                     listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
 
                     if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
-                        // Se o produto ñ existe, add, senão substitui
+                        // Se o produto ñ existe -> add, se existe -> substitui
                         if (!model.contains(p))
                             model.addElement(p);
                         model.set(comboProdutos.getSelectedIndex(), p);
