@@ -90,7 +90,7 @@ public class MenuVenda extends JFrame {
         list = new JList<Produto>();
         DefaultListModel<Produto> model = new DefaultListModel<Produto>();
         list.setModel(model);
-        list.setBounds(540, 0, 450, 512); 
+        list.setBounds(540, 0, 450, 512);
         contentPane.add(list);
 
         JButton btnAddPedido = new JButton("");
@@ -111,10 +111,13 @@ public class MenuVenda extends JFrame {
                     listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
 
                     if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
+                        // Se o produto ñ existe, add, senão substitui
+                        if (!model.contains(p))
+                            model.addElement(p);
+                        model.set(comboProdutos.getSelectedIndex(), p);
 
-                        model.addElement(p);
-                        
                         qtdAtual.setText(p.getQuantidade() + "");
+                        textQtdPedido.setText("");
                     }
 
                 } catch (Exception e1) {
