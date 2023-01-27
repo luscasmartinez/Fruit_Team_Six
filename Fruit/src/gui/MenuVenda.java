@@ -37,20 +37,12 @@ public class MenuVenda extends JFrame {
         this.listaProdutos = listaProdutos;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 902, 551);
+        setBounds(100, 100, 1006, 551);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        JButton btnFinalizar = new JButton("");
-        btnFinalizar.setBorder(null);
-        btnFinalizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        btnFinalizar.setContentAreaFilled(false);
-        btnFinalizar.setBorderPainted(false);
-        btnFinalizar.setBounds(55, 433, 135, 41);
-        contentPane.add(btnFinalizar);
 
         JButton btnNotaFiscal = new JButton("");
         btnNotaFiscal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -98,7 +90,7 @@ public class MenuVenda extends JFrame {
         list = new JList<Produto>();
         DefaultListModel<Produto> model = new DefaultListModel<Produto>();
         list.setModel(model);
-        list.setBounds(540, 0, 346, 512);
+        list.setBounds(540, 0, 450, 512); 
         contentPane.add(list);
 
         JButton btnAddPedido = new JButton("");
@@ -108,6 +100,7 @@ public class MenuVenda extends JFrame {
         btnAddPedido.setBorderPainted(false);
         btnAddPedido.setBounds(208, 432, 135, 40);
         contentPane.add(btnAddPedido);
+
         // Botão add pedido
         btnAddPedido.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -118,7 +111,9 @@ public class MenuVenda extends JFrame {
                     listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
 
                     if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
+
                         model.addElement(p);
+                        
                         qtdAtual.setText(p.getQuantidade() + "");
                     }
 
@@ -126,6 +121,25 @@ public class MenuVenda extends JFrame {
                 }
             }
         });
+
+        // Botão finalizar venda
+        JButton btnFinalizar = new JButton("");
+        btnFinalizar.setBorder(null);
+        btnFinalizar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnFinalizar.setContentAreaFilled(false);
+        btnFinalizar.setBorderPainted(false);
+        btnFinalizar.addActionListener(new ActionListener() {
+            // Ação
+            public void actionPerformed(ActionEvent e) {
+
+                for (int i = 0; i < model.getSize(); i++) {
+                    Produto p = model.get(i);
+                    System.out.println(p.toString());
+                }
+            }
+        });
+        btnFinalizar.setBounds(55, 433, 135, 41);
+        contentPane.add(btnFinalizar);
 
         textQtdPedido = new JTextField();
         textQtdPedido.setFont(new Font("Tahoma", Font.PLAIN, 20));
