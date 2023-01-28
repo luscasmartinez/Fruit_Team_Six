@@ -30,7 +30,7 @@ public class CadNotaFiscal implements INotasFiscais {
             return nf;
         return null;
     }
-
+//2
     @Override
     public double getTotal(int codigo) throws Exception {
         // TODO Auto-generated method stub

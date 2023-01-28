@@ -6,7 +6,7 @@ import gui.MenuInicial;
 
 public class App {
     /**
-     * Inicia a Aplicação
+     * 7 Inicia a Aplicação
      */
     public static void main(String[] args) throws Exception {
         EventQueue.invokeLater(new Runnable() {

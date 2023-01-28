@@ -30,7 +30,7 @@ public interface IProdutos {
     public abstract void removeProduto(int codigo) throws Exception;
 
     /**
-     * Captura o produto com o código informado.
+     * Captura o produto com o código informado..
      * 
      * @param codigo Código do produto a ser capturado.
      * @return Produto Produto capturado.

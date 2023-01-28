@@ -72,7 +72,7 @@ public class MenuNota extends JFrame {
 		btnExcluir.setFont(new Font("Ink Free", Font.PLAIN, 20));
 		btnExcluir.setBounds(10, 462, 190, 58);
 		contentPane.add(btnExcluir);
-		
+		//8
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(0, 0, 1002, 603);
 		lblNewLabel.setForeground(new Color(255, 255, 255));

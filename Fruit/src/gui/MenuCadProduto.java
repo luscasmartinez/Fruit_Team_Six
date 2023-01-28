@@ -74,7 +74,7 @@ public class MenuCadProduto extends JFrame {
 		textNome.setBounds(273, 149, 171, 29);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
-
+//7
 		textDescricao = new JTextField();
 		textDescricao.setFont(new Font("Arial", Font.PLAIN, 25));
 		textDescricao.setBounds(273, 221, 171, 29);

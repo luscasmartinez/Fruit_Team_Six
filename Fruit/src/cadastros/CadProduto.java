@@ -14,7 +14,7 @@ public class CadProduto implements IProdutos {
     public CadProduto() {
         listaProdutos = new LinkedList<Produto>();
     }
-
+//3
     @Override
     public void addProduto(Produto p) throws Exception {
         listaProdutos.add(p);

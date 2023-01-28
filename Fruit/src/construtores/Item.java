@@ -15,7 +15,7 @@ public class Item {
 
     public int getQuantidade() {return this.quantidade;}
     public void setQuantidade(int quantidade) {this.quantidade = quantidade;}
-
+//4
     public double getPreco() {return this.produto.getPreco();}
     public double getPrecoTotal() {return this.produto.getPreco() * this.quantidade;}
 

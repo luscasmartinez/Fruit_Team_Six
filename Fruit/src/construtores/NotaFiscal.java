@@ -15,7 +15,7 @@ public class NotaFiscal {
 
     public Date getDataEmissao() {return this.dataEmissao;}
     public void setDataEmissao(Date dataEmissao) {this.dataEmissao = dataEmissao;}
-
+//5
     public Item getItem() {return this.item;}
     public void setItem(Item item) {this.item = item;}
 

@@ -22,7 +22,7 @@ public class Produto {
         this.quantidade = quantidadeKg;
         this.preco = preco;
     }
-
+//6
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }

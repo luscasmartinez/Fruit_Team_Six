@@ -51,6 +51,8 @@ public class MenuVenda extends JFrame {
         btnNotaFiscal.setContentAreaFilled(false);
         btnNotaFiscal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                MenuNota menuNota = new MenuNota(null);
+                menuNota.setVisible(true);
             }
         });
         btnNotaFiscal.setBounds(375, 435, 135, 38);
@@ -119,7 +121,7 @@ public class MenuVenda extends JFrame {
                         qtdAtual.setText(p.getQuantidade() + "");
                         textQtdPedido.setText("");
                     }
-
+//9
                 } catch (Exception e1) {
                 }
             }
