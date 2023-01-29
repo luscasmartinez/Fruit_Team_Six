@@ -46,14 +46,15 @@ public class MenuNota extends JFrame {
 		listProdutos.setBounds(605, 0, 397, 603);
 		contentPane.add(listProdutos);
 		
-		JButton btnNewButton = new JButton("Menu Nostas Fiscais");
-		btnNewButton.setBorder(null);
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 35));
-		btnNewButton.setBounds(256, 0, 339, 74);
-		contentPane.add(btnNewButton);
-		
+		/***************************************************************************************/
+		JButton btnNewButton = new JButton("Menu Nostas Fiscais");                     /***/
+		btnNewButton.setBorder(null);                                                /***/
+		btnNewButton.setContentAreaFilled(false);                                         /***/
+		btnNewButton.setBorderPainted(false);                                             /* iGNORAR*/
+		btnNewButton.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 35));       /***/
+		btnNewButton.setBounds(256, 0, 339, 74);                         /***/
+		contentPane.add(btnNewButton);                                                      /***/
+		/***************************************************************************************/
 		JButton btnVoltar = new JButton(" Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
