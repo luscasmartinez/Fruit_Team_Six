@@ -17,23 +17,27 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import cadastros.CadItem;
 import cadastros.CadProduto;
+import construtores.Item;
 import construtores.Produto;
 
 public class MenuVenda extends JFrame {
 
     private CadProduto listaProdutos;
+    private CadItem listaItens;
 
     private JPanel contentPane;
     private JTextField textQtdAtual;
     private JTextField textQtdPedido;
 
-    private JList<Produto> list;
+    private JList<Item> list;
 
     /**
      * Create the frame.
      */
-    public MenuVenda(CadProduto listaProdutos) {
+    public MenuVenda(CadProduto listaProdutos, CadItem listaItens) {
+        this.listaItens = listaItens;
         this.listaProdutos = listaProdutos;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -89,8 +93,8 @@ public class MenuVenda extends JFrame {
             }
         });
 
-        list = new JList<Produto>();
-        DefaultListModel<Produto> model = new DefaultListModel<Produto>();
+        list = new JList<Item>();
+        DefaultListModel<Item> model = new DefaultListModel<Item>();
         list.setModel(model);
         list.setBounds(540, 0, 450, 512);
         contentPane.add(list);
@@ -110,18 +114,18 @@ public class MenuVenda extends JFrame {
                 try {
                     Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex() + 1);
 
-                    listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
-
                     if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
+                        listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
+                        Item item = new Item(p, Integer.parseInt(textQtdPedido.getText()));
                         // Se o produto ñ existe -> add, se existe -> substitui
-                        if (!model.contains(p))
-                            model.addElement(p);
-                        model.set(comboProdutos.getSelectedIndex(), p);
+                        if (!model.contains(item.getProduto()))
+                            model.addElement(item);
+                        model.set(comboProdutos.getSelectedIndex(), item);
 
                         qtdAtual.setText(p.getQuantidade() + "");
                         textQtdPedido.setText("");
                     }
-//9
+                    // 9
                 } catch (Exception e1) {
                 }
             }
@@ -138,7 +142,7 @@ public class MenuVenda extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 for (int i = 0; i < model.getSize(); i++) {
-                    Produto p = model.get(i);
+                    Item p = model.get(i);
                     System.out.println(p.toString());
                 }
             }
