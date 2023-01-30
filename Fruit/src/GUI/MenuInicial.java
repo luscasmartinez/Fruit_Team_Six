@@ -34,9 +34,6 @@ public class MenuInicial extends JFrame {
 	public MenuInicial() {
 
 		menucadProduto = new MenuCadProduto(listaProdutos);
-		menuVenda = new MenuVenda(listaProdutos, listaItens);
-		
-		
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);

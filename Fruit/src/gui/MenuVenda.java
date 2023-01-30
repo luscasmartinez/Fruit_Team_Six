@@ -118,14 +118,13 @@ public class MenuVenda extends JFrame {
                         listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
                         Item item = new Item(p, Integer.parseInt(textQtdPedido.getText()));
                         // Se o produto ñ existe -> add, se existe -> substitui
-                        if (!model.contains(item.getProduto()))
+                    //    if (!model.contains(item))
                             model.addElement(item);
-                        model.set(comboProdutos.getSelectedIndex(), item);
+                     //   model.set(comboProdutos.getSelectedIndex(), item);
 
                         qtdAtual.setText(p.getQuantidade() + "");
                         textQtdPedido.setText("");
                     }
-                    // 9
                 } catch (Exception e1) {
                 }
             }
@@ -159,6 +158,7 @@ public class MenuVenda extends JFrame {
         JButton btnVoltar = new JButton("Voltar");
         btnVoltar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 setVisible(false);
             }
         });
