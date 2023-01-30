@@ -13,6 +13,7 @@ import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
@@ -37,24 +38,15 @@ public class MenuNota extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JComboBox comboItens = new JComboBox();
-		comboItens.setBounds(10, 85, 284, 52);
+		comboItens.setBounds(157, 117, 304, 52);
 		contentPane.add(comboItens);
-		
+
 		JList listProdutos = new JList();
 		listProdutos.setBounds(605, 0, 397, 603);
 		contentPane.add(listProdutos);
 		
-		/***************************************************************************************/
-		JButton btnNewButton = new JButton("Menu Nostas Fiscais");                     /***/
-		btnNewButton.setBorder(null);                                                /***/
-		btnNewButton.setContentAreaFilled(false);                                         /***/
-		btnNewButton.setBorderPainted(false);                                             /* iGNORAR*/
-		btnNewButton.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 35));       /***/
-		btnNewButton.setBounds(256, 0, 339, 74);                         /***/
-		contentPane.add(btnNewButton);                                                      /***/
-		/***************************************************************************************/
 		JButton btnVoltar = new JButton(" Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -64,7 +56,7 @@ public class MenuNota extends JFrame {
 		btnVoltar.setFont(new Font("Ink Free", Font.PLAIN, 20));
 		btnVoltar.setBounds(10, 535, 192, 57);
 		contentPane.add(btnVoltar);
-		
+
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -73,9 +65,10 @@ public class MenuNota extends JFrame {
 		btnExcluir.setFont(new Font("Ink Free", Font.PLAIN, 20));
 		btnExcluir.setBounds(10, 462, 190, 58);
 		contentPane.add(btnExcluir);
-		//8
+
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(0, 0, 1002, 603);
+		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\img\\MenuNota.png"));
+		lblNewLabel.setBounds(0, 0, 608, 603);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblNewLabel);
 	}
