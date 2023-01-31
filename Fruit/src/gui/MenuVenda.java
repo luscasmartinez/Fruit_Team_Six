@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -12,6 +13,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -20,12 +22,14 @@ import javax.swing.border.EmptyBorder;
 import cadastros.CadItem;
 import cadastros.CadProduto;
 import construtores.Item;
+import construtores.NotaFiscal;
 import construtores.Produto;
 
 public class MenuVenda extends JFrame {
 
     private CadProduto listaProdutos;
     private CadItem listaItens;
+    private NotaFiscal listaNotaFiscal;
 
     private JPanel contentPane;
     private JTextField textQtdAtual;
@@ -33,10 +37,13 @@ public class MenuVenda extends JFrame {
 
     private JList<Item> list;
 
+    private static int codNota = 1;
+
     /**
      * Create the frame.
      */
-    public MenuVenda(CadProduto listaProdutos, CadItem listaItens) {
+    public MenuVenda(CadProduto listaProdutos, CadItem listaItens, NotaFiscal listaNotaFiscal) {
+        this.listaNotaFiscal = listaNotaFiscal;
         this.listaItens = listaItens;
         this.listaProdutos = listaProdutos;
 
@@ -55,7 +62,7 @@ public class MenuVenda extends JFrame {
         btnNotaFiscal.setContentAreaFilled(false);
         btnNotaFiscal.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MenuNota menuNota = new MenuNota(null);
+                MenuNota menuNota = new MenuNota(listaNotaFiscal);
                 menuNota.setVisible(true);
             }
         });
@@ -63,7 +70,6 @@ public class MenuVenda extends JFrame {
         contentPane.add(btnNotaFiscal);
 
         // Combo Box com produtos
-
         JComboBox<String> comboProdutos = new JComboBox();
         comboProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20));
         comboProdutos.setBounds(193, 93, 318, 41);
@@ -117,13 +123,14 @@ public class MenuVenda extends JFrame {
                     if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
                         listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
                         Item item = new Item(p, Integer.parseInt(textQtdPedido.getText()));
-                        // Se o produto ñ existe -> add, se existe -> substitui
-                    //    if (!model.contains(item))
-                            model.addElement(item);
-                     //   model.set(comboProdutos.getSelectedIndex(), item);
+                        // adiciona a lista
+                        model.addElement(item);
 
                         qtdAtual.setText(p.getQuantidade() + "");
                         textQtdPedido.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null,
+                                "Quantidade atual insuficiente.");
                     }
                 } catch (Exception e1) {
                 }
@@ -139,11 +146,21 @@ public class MenuVenda extends JFrame {
         btnFinalizar.addActionListener(new ActionListener() {
             // Ação
             public void actionPerformed(ActionEvent e) {
-
+                Date data = new Date();
+                NotaFiscal nota = new NotaFiscal(codNota, data);
                 for (int i = 0; i < model.getSize(); i++) {
-                    Item p = model.get(i);
-                    System.out.println(p.toString());
+                    Item item = model.get(i);
+                    nota.setItem(item);
                 }
+                codNota++;
+                try {
+                    listaNotaFiscal.addNotaFiscal(nota);
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+                System.out.println(nota);
+                JOptionPane.showMessageDialog(null, "Nota " + nota.getCodigo() + " Criada!");
+                model.clear();
             }
         });
         btnFinalizar.setBounds(55, 433, 135, 41);
@@ -165,6 +182,16 @@ public class MenuVenda extends JFrame {
 
         btnVoltar.setBounds(423, 11, 89, 23);
         contentPane.add(btnVoltar);
+
+        JButton btnRemover = new JButton("Remover");
+        btnRemover.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                DefaultListModel<Item> model = (DefaultListModel<Item>) list.getModel();
+                model.remove(list.getSelectedIndex());
+            }
+        });
+        btnRemover.setBounds(228, 398, 89, 23);
+        contentPane.add(btnRemover);
 
         JLabel lblNewLabel = new JLabel("New label");
         lblNewLabel.setIcon(new ImageIcon(

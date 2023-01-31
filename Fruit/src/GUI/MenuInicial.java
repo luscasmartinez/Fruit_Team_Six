@@ -12,15 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadItem;
-import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
+import construtores.NotaFiscal;
 
 public class MenuInicial extends JFrame {
 
 	private JPanel contentPane;
 
 	CadProduto listaProdutos = new CadProduto();
-	CadNotaFiscal listaNotaFiscal = new CadNotaFiscal();
+	NotaFiscal listaNotaFiscal = new NotaFiscal();
 	CadItem listaItens = new CadItem();
 
 	private MenuCadProduto menucadProduto;
@@ -59,9 +59,9 @@ public class MenuInicial extends JFrame {
 		JButton btnCompra = new JButton("");
 		btnCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				menuVenda = new MenuVenda(listaProdutos, listaItens);
+				menuVenda = new MenuVenda(listaProdutos, listaItens, listaNotaFiscal);
 				menuVenda.setVisible(true);
-				
+
 				// Evento aqui.
 			}
 
