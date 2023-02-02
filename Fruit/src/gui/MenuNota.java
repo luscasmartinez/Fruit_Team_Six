@@ -14,18 +14,18 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import construtores.NotaFiscal;
+import cadastros.CadNotaFiscal;
 
 public class MenuNota extends JFrame {
 
 	private JPanel contentPane;
 
-	private NotaFiscal listaNotaFiscal;
+	private CadNotaFiscal listaNotaFiscal;
 
 	/**
 	 * Create the frame.
 	 */
-	public MenuNota(NotaFiscal listaNotaFiscal) {
+	public MenuNota(CadNotaFiscal listaNotaFiscal) {
 		this.listaNotaFiscal = listaNotaFiscal;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

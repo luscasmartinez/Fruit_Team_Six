@@ -12,15 +12,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadItem;
+import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
-import construtores.NotaFiscal;
 
 public class MenuInicial extends JFrame {
 
 	private JPanel contentPane;
 
 	CadProduto listaProdutos = new CadProduto();
-	NotaFiscal listaNotaFiscal = new NotaFiscal();
+	CadNotaFiscal listaNotaFiscal = new CadNotaFiscal();
 	CadItem listaItens = new CadItem();
 
 	private MenuCadProduto menucadProduto;

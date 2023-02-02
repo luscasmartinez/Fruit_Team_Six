@@ -20,6 +20,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadItem;
+import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
 import construtores.Item;
 import construtores.NotaFiscal;
@@ -29,7 +30,7 @@ public class MenuVenda extends JFrame {
 
     private CadProduto listaProdutos;
     private CadItem listaItens;
-    private NotaFiscal listaNotaFiscal;
+    private CadNotaFiscal listaNotaFiscal;
 
     private JPanel contentPane;
     private JTextField textQtdAtual;
@@ -42,7 +43,7 @@ public class MenuVenda extends JFrame {
     /**
      * Create the frame.
      */
-    public MenuVenda(CadProduto listaProdutos, CadItem listaItens, NotaFiscal listaNotaFiscal) {
+    public MenuVenda(CadProduto listaProdutos, CadItem listaItens, CadNotaFiscal listaNotaFiscal) {
         this.listaNotaFiscal = listaNotaFiscal;
         this.listaItens = listaItens;
         this.listaProdutos = listaProdutos;
