@@ -1,5 +1,6 @@
 package construtores;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -32,11 +33,22 @@ public class NotaFiscal {
         this.dataEmissao = dataEmissao;
     }
 
-    public Item getItem() {
-        return this.listaItens.get(0);
+    public LinkedList<Item> getListaItens() {
+        return this.listaItens;
     }
 
     public void setItem(Item item) {
         listaItens.add(item);
+    }
+
+    public String toString() {
+        String dado = "";
+        dado += "NotaFiscal: " + codigo
+                + ", Emissão: " + dataEmissao
+                + ", Itens: ";
+        for (Item item : listaItens) {
+            dado += item.toString() + " ";
+        }
+        return dado;
     }
 }

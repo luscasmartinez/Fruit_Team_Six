@@ -10,5 +10,4 @@ public class CadItem {
   public CadItem() {
     itemList = new LinkedList<Item>();
   }
-//1
 }

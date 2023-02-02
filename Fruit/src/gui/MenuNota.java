@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,6 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import cadastros.CadNotaFiscal;
+import construtores.Item;
+import construtores.NotaFiscal;
 
 public class MenuNota extends JFrame {
 
@@ -37,7 +40,7 @@ public class MenuNota extends JFrame {
 		contentPane.setLayout(null);
 
 		// Lista de Notas
-		JComboBox<String> comboNotas = new JComboBox();
+		JComboBox<String> comboNotas = new JComboBox<String>();
 		comboNotas.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		comboNotas.setBounds(157, 117, 304, 52);
 
@@ -49,9 +52,31 @@ public class MenuNota extends JFrame {
 		}
 		contentPane.add(comboNotas);
 
-		JList listProdutos = new JList();
-		listProdutos.setBounds(605, 0, 397, 603);
-		contentPane.add(listProdutos);
+		JList<Item> listItens = new JList<>();
+		listItens.setBounds(605, 0, 397, 603);
+		DefaultListModel<Item> modelNota = new DefaultListModel<Item>();
+		listItens.setModel(modelNota);
+		contentPane.add(listItens);
+
+		JButton btnCarregar = new JButton("Carregar");
+		btnCarregar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Ao clicar
+				modelNota.clear();
+				try {
+					NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
+					// adiciona a lista
+					for (Item i : nf.getListaItens()) {
+						modelNota.addElement(i);
+					}
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnCarregar.setBounds(255, 224, 118, 52);
+		contentPane.add(btnCarregar);
 
 		JButton btnVoltar = new JButton(" Voltar");
 		btnVoltar.addActionListener(new ActionListener() {

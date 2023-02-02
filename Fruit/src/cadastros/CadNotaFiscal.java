@@ -7,7 +7,6 @@ import construtores.NotaFiscal;
 import interfaces.INotasFiscais;
 
 public class CadNotaFiscal implements INotasFiscais {
-
     private LinkedList<NotaFiscal> listaNotaFiscal;
 
     public CadNotaFiscal() {
