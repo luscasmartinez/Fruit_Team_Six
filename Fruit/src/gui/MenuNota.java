@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -71,7 +72,8 @@ public class MenuNota extends JFrame {
 					}
 
 				} catch (Exception e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null,
+							"Não há notas no sistema.");
 				}
 			}
 		});
@@ -91,6 +93,17 @@ public class MenuNota extends JFrame {
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
+					listaNotaFiscal.removeNotaFiscal(nf.getCodigo());
+					modelNota.clear();
+					MenuNota menuNota = new MenuNota(listaNotaFiscal);
+					setVisible(false);
+					menuNota.setVisible(true);
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null,
+							"Não há notas no sistema.");
+				}
 			}
 		});
 		btnExcluir.setFont(new Font("Ink Free", Font.PLAIN, 20));
