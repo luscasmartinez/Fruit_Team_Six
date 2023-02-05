@@ -23,7 +23,10 @@ import javax.swing.text.MaskFormatter;
 import cadastros.CadProduto;
 import construtores.Produto;
 
-public class MenuCadProduto extends JFrame {
+/**
+ * Janela de cadastro de produtos
+ */
+public class MenuCadProduto extends JFrame implements ActionListener {
 
 	private CadProduto listaProdutos;
 
@@ -36,9 +39,14 @@ public class MenuCadProduto extends JFrame {
 	private JTextField textQuantidade;
 	private JList<Produto> listProdutos;
 
-	/**
-	 * Cria a Janela.
-	 */
+	private JButton btnVoltar;
+	private JButton btnConfirmarCadastro;
+
+	private JRadioButton btnQuantidade;
+	private JRadioButton btnKg;
+
+	private DefaultListModel<Produto> model;
+
 	public MenuCadProduto(CadProduto listaProdutos) {
 		this.listaProdutos = listaProdutos;
 
@@ -46,16 +54,12 @@ public class MenuCadProduto extends JFrame {
 		setBounds(100, 100, 814, 580);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-
-		// Campos de texto abaixo ->
 
 		textCodigo = new JTextField();
 		textCodigo.setEditable(false);
 		textCodigo.setText(Integer.toString(cod));
-
 		textCodigo.setFont(new Font("Arial", Font.PLAIN, 25));
 		textCodigo.setBounds(273, 91, 171, 29);
 		contentPane.add(textCodigo);
@@ -85,60 +89,63 @@ public class MenuCadProduto extends JFrame {
 		}
 
 		listProdutos = new JList<Produto>();
-		DefaultListModel<Produto> model = new DefaultListModel<Produto>();
+		model = new DefaultListModel<Produto>();
 		listProdutos.setModel(model);
 		listProdutos.setBounds(537, 0, 261, 540);
 		contentPane.add(listProdutos);
 
-		try {
-			// MaskFormatter mf = new MaskFormatter("######");
-			textQuantidade = new JTextField();
-			textQuantidade.setBounds(273, 368, 171, 29);
-			textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
-			contentPane.add(textQuantidade);
-			textQuantidade.setColumns(10);
-		} catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
+		textQuantidade = new JTextField();
+		textQuantidade.setBounds(273, 368, 171, 29);
+		textQuantidade.setFont(new Font("Arial", Font.PLAIN, 25));
+		contentPane.add(textQuantidade);
+		textQuantidade.setColumns(10);
 
-		}
-
-		// <- Fim dos campo de texto
-
-		// Inicio dos botões Radio ->
-
-		JRadioButton btnQuantidade = new JRadioButton("Unidade");
+		btnQuantidade = new JRadioButton("Unidade");
 		btnQuantidade.setBounds(273, 418, 78, 23);
 		contentPane.add(btnQuantidade);
+		btnQuantidade.addActionListener(this);
 
-		JRadioButton btnKg = new JRadioButton("Kg");
+		btnKg = new JRadioButton("Kg");
 		btnKg.setBounds(402, 417, 42, 23);
 		contentPane.add(btnKg);
-		// <- Fim dos botões Radio
+		btnKg.addActionListener(this);
 
-		// Desmarcda aopção Kg.
-		btnQuantidade.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnKg.setSelected(false);
-			}
-		});
+		btnConfirmarCadastro = new JButton("");
+		btnConfirmarCadastro.addActionListener(this);
+		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnConfirmarCadastro.setContentAreaFilled(false);
+		btnConfirmarCadastro.setBorderPainted(false);
+		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
+		contentPane.add(btnConfirmarCadastro);
 
-		// Desmarca a opção Unidade
-		btnKg.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				btnQuantidade.setSelected(false);
-			}
-		});
+		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnConfirmarCadastro.setContentAreaFilled(false);
+		btnConfirmarCadastro.setBorderPainted(false);
+		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
+		contentPane.add(btnConfirmarCadastro);
 
-		// Botão de cadastro
+		btnVoltar = new JButton("");
+		btnVoltar.addActionListener(this);
+		btnVoltar.setBorder(null);
+		btnVoltar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnVoltar.setDefaultCapable(false);
+		btnVoltar.setContentAreaFilled(false);
+		btnVoltar.setBorderPainted(false);
+		btnVoltar.setBounds(438, 11, 89, 52);
+		contentPane.add(btnVoltar);
 
-		JButton btnConfirmarCadastro = new JButton("");
-		btnConfirmarCadastro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (textCodigo.getText().isEmpty() ||
-						textDescricao.getText().isEmpty() ||
-						textNome.getText().isEmpty() ||
-						textPreco.getText().equals("  .  ") ||
-						textQuantidade.getText().equals("      ")) {
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuCadastro.png"));
+		lblNewLabel.setBounds(0, 0, 539, 540);
+		contentPane.add(lblNewLabel);
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+		
+		if(ev.getSource() == btnConfirmarCadastro ){
+			if (verificarCamposEmBranco()) {
 
 					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
 
@@ -153,11 +160,7 @@ public class MenuCadProduto extends JFrame {
 						listaProdutos.addProduto(novoProduto);
 
 						textCodigo.setText(Integer.toString(cod));
-						textDescricao.setText("");
-						textNome.setText("");
-						textPreco.setText("");
-						textQuantidade.setText("");
-						textNome.requestFocus();
+						limparCampos();
 
 
 					} catch (Exception e3) {
@@ -180,11 +183,7 @@ public class MenuCadProduto extends JFrame {
 						listaProdutos.addProduto(novoProduto);
 
 						textCodigo.setText(Integer.toString(cod));
-						textDescricao.setText("");
-						textNome.setText("");
-						textPreco.setText("");
-						textQuantidade.setText("");
-						textNome.requestFocus();
+						limparCampos();
 
 					} catch (Exception e4) {
 						JOptionPane.showMessageDialog(null, "Por favor, utilize \n apenas numeros na quantidade");
@@ -199,40 +198,53 @@ public class MenuCadProduto extends JFrame {
 
 					JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
 				}
+		}
 
-			}
+		if(ev.getSource() == btnVoltar){
+			setVisible(false);
+		}
 
-		});
-		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnConfirmarCadastro.setContentAreaFilled(false);
-		btnConfirmarCadastro.setBorderPainted(false);
-		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
-		contentPane.add(btnConfirmarCadastro);
+		if(ev.getSource() == btnKg){
+			btnKg.setSelected(true);
+			btnQuantidade.setSelected(false);
+		}
 
-		btnConfirmarCadastro.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnConfirmarCadastro.setContentAreaFilled(false);
-		btnConfirmarCadastro.setBorderPainted(false);
-		btnConfirmarCadastro.setBounds(196, 466, 146, 41);
-		contentPane.add(btnConfirmarCadastro);
-
-		JButton btnVoltar = new JButton("");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
-		btnVoltar.setBorder(null);
-		btnVoltar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnVoltar.setDefaultCapable(false);
-		btnVoltar.setContentAreaFilled(false);
-		btnVoltar.setBorderPainted(false);
-		btnVoltar.setBounds(438, 11, 89, 52);
-		contentPane.add(btnVoltar);
-
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuCadastro.png"));
-		lblNewLabel.setBounds(0, 0, 539, 540);
-		contentPane.add(lblNewLabel);
+		if(ev.getSource() == btnQuantidade){
+			btnQuantidade.setSelected(true);
+			btnKg.setSelected(false);
+		}
+		
 
 	}
+
+	public void limparCampos(){
+		textDescricao.setText("");
+		textNome.setText("");
+		textPreco.setText("");
+		textQuantidade.setText("");
+		textNome.requestFocus();
+		btnKg.setSelected(false);
+		btnQuantidade.setSelected(false);
+	}
+
+	public boolean verificarCamposEmBranco(){
+		if (textCodigo.getText().isEmpty() || textDescricao.getText().isEmpty()
+			|| textNome.getText().isEmpty() || textPreco.getText().equals("  .  ")
+			|| textQuantidade.getText().equals("      "))
+				return true;
+			return false;
+	}
+
+
+	public void formatarValor(JFormattedTextField text) {
+		try {
+			MaskFormatter mask = new MaskFormatter("##.##");
+			mask.install(text);
+		} catch (ParseException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao formatar texto", "ERRO", JOptionPane.ERROR);
+		}
+	} 
+
+
+
 }

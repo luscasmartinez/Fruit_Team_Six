@@ -14,6 +14,9 @@ import cadastros.CadItem;
 import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
 
+/**
+ * Cria a janela inicial do software.
+ */
 public class MenuInicial extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -30,14 +33,9 @@ public class MenuInicial extends JFrame implements ActionListener {
 	private JButton btnCompra;
 	private JButton btnNotas;
 
-	/**
-	 * 
-	 * Create the frame.
-	 */
 	public MenuInicial() {
-
+		
 		menucadProduto = new MenuCadProduto(listaProdutos);
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 509, 525);
 		contentPane = new JPanel();
