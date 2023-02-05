@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import Exceptions.CamposEmBrancoException;
+import Exceptions.ProdutoNaoAdcionadoAListaException;
 import cadastros.CadProduto;
 import construtores.Produto;
 
@@ -162,10 +163,8 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 					limparCampos();
 				}
 
-			} catch (CamposEmBrancoException e){
+			} catch (CamposEmBrancoException | ProdutoNaoAdcionadoAListaException e){
 				JOptionPane.showMessageDialog(null, e);
-			} catch (Exception e) {
-				e.printStackTrace();
 			}
 
 			adicionarNaListaLateral();
