@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import Exceptions.CamposEmBrancoException;
 import cadastros.CadProduto;
 import construtores.Produto;
 
@@ -35,7 +36,7 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 	private JTextField textCodigo;
 	private JTextField textNome;
 	private JTextField textDescricao;
-	private JTextField textPreco;
+	private JFormattedTextField textPreco;
 	private JTextField textQuantidade;
 	private JList<Produto> listProdutos;
 
@@ -46,6 +47,7 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 	private JRadioButton btnKg;
 
 	private DefaultListModel<Produto> model;
+	private double quantidade;
 
 	public MenuCadProduto(CadProduto listaProdutos) {
 		this.listaProdutos = listaProdutos;
@@ -77,16 +79,12 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 		contentPane.add(textDescricao);
 		textDescricao.setColumns(10);
 
-		try {
-			MaskFormatter mf = new MaskFormatter("##.##");
-			textPreco = new JFormattedTextField(mf);
-			textPreco.setFont(new Font("Arial", Font.PLAIN, 25));
-			textPreco.setBounds(273, 296, 171, 29);
-			contentPane.add(textPreco);
-			textPreco.setColumns(10);
-		} catch (ParseException | NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
-		}
+		textPreco = new JFormattedTextField();
+		formatarValor(textPreco);
+		textPreco.setFont(new Font("Arial", Font.PLAIN, 25));
+		textPreco.setBounds(273, 296, 171, 29);
+		contentPane.add(textPreco);
+		textPreco.setColumns(10);
 
 		listProdutos = new JList<Produto>();
 		model = new DefaultListModel<Produto>();
@@ -138,66 +136,40 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\IMG\\MenuCadastro.png"));
 		lblNewLabel.setBounds(0, 0, 539, 540);
 		contentPane.add(lblNewLabel);
-
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent ev) {
 		
 		if(ev.getSource() == btnConfirmarCadastro ){
-			if (verificarCamposEmBranco()) {
 
-					JOptionPane.showMessageDialog(null, "Por favor, preencha todos os campos");
-
-				} else if (btnKg.isSelected()) {
-					try {
-						Produto novoProduto = new Produto(textNome.getText(),
-								textDescricao.getText(),
-								cod,
-								Double.parseDouble(textQuantidade.getText()),
-								Double.parseDouble(textPreco.getText()));
-						cod++;
-						listaProdutos.addProduto(novoProduto);
-
-						textCodigo.setText(Integer.toString(cod));
-						limparCampos();
-
-
-					} catch (Exception e3) {
-						JOptionPane.showMessageDialog(null, "Por favor, utilize \n apenas numeros na quantidade");
-					}
-
-					for (Produto p : listaProdutos.listaProdutos) {
-						if (p.getCodigo() == cod - 1)
-							model.addElement(p);
-					}
+			try{
+				if(!verificarCamposEmBranco()){
 					
-				} else if (btnQuantidade.isSelected()) {
-					try {
-						Produto novoProduto = new Produto(textNome.getText(),
-								textDescricao.getText(),
-								cod,
-								Integer.parseInt(textQuantidade.getText()),
-								Double.parseDouble(textPreco.getText()));
-						cod++;
-						listaProdutos.addProduto(novoProduto);
+					if(btnKg.isSelected()){
+						quantidade = Double.parseDouble(textQuantidade.getText());
+					} else if(btnQuantidade.isSelected()){
+						quantidade = Integer.parseInt(textQuantidade.getText());
+					}	
 
-						textCodigo.setText(Integer.toString(cod));
-						limparCampos();
-
-					} catch (Exception e4) {
-						JOptionPane.showMessageDialog(null, "Por favor, utilize \n apenas numeros na quantidade");
-					}
-
-					for (Produto p : listaProdutos.listaProdutos) {
-						if (p.getCodigo() == cod - 1)
-							model.addElement(p);
-					}
-
-				} else {
-
-					JOptionPane.showMessageDialog(null, "Selecione uma das opções \n Kg ou Unidade");
+					Produto novoProduto = new Produto(textNome.getText(),
+					textDescricao.getText(), cod, quantidade,
+					Double.parseDouble(textPreco.getText()));
+					
+					cod++;
+					listaProdutos.addProduto(novoProduto);
+					textCodigo.setText(Integer.toString(cod));
+					limparCampos();
 				}
+
+			} catch (CamposEmBrancoException e){
+				JOptionPane.showMessageDialog(null, e);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			adicionarNaListaLateral();
+
 		}
 
 		if(ev.getSource() == btnVoltar){
@@ -213,8 +185,6 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 			btnQuantidade.setSelected(true);
 			btnKg.setSelected(false);
 		}
-		
-
 	}
 
 	public void limparCampos(){
@@ -227,14 +197,13 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 		btnQuantidade.setSelected(false);
 	}
 
-	public boolean verificarCamposEmBranco(){
+	public boolean verificarCamposEmBranco() throws CamposEmBrancoException{
 		if (textCodigo.getText().isEmpty() || textDescricao.getText().isEmpty()
 			|| textNome.getText().isEmpty() || textPreco.getText().equals("  .  ")
 			|| textQuantidade.getText().equals("      "))
-				return true;
+				throw new CamposEmBrancoException();
 			return false;
 	}
-
 
 	public void formatarValor(JFormattedTextField text) {
 		try {
@@ -243,8 +212,12 @@ public class MenuCadProduto extends JFrame implements ActionListener {
 		} catch (ParseException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao formatar texto", "ERRO", JOptionPane.ERROR);
 		}
-	} 
+	}
 
-
-
+	public void adicionarNaListaLateral(){
+		for (Produto p : listaProdutos.listaProdutos) {
+			if (p.getCodigo() == cod - 1)
+				model.addElement(p);
+		}
+	}
 }
