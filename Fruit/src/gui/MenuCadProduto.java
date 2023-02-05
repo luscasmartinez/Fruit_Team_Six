@@ -42,14 +42,6 @@ public class MenuCadProduto extends JFrame {
 	public MenuCadProduto(CadProduto listaProdutos) {
 		this.listaProdutos = listaProdutos;
 
-		try{
-			Produto fruta1 =  new Produto("Melão", "Melão Hibrido", 1, 100, 10.99);
-			Produto fruta2 =  new Produto("Mamão", "Mamão Formosa", 2, 100, 10.99);
-			listaProdutos.addProduto(fruta1);
-			listaProdutos.addProduto(fruta2);
-		}catch(Exception e){
-
-		}
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 814, 580);
 		contentPane = new JPanel();
