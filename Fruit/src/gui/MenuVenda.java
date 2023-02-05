@@ -27,6 +27,9 @@ import construtores.Item;
 import construtores.NotaFiscal;
 import construtores.Produto;
 
+/**
+ * Janela para cadastro de vendas e emissao de notas
+ */
 public class MenuVenda extends JFrame implements ActionListener {
 
     private CadProduto listaProdutos;
@@ -192,8 +195,12 @@ public class MenuVenda extends JFrame implements ActionListener {
         }
 
         if(ev.getSource() == btnRemover){
-            DefaultListModel<Item> model = (DefaultListModel<Item>) list.getModel();
-            model.remove(list.getSelectedIndex());
+            if (list.isSelectionEmpty()){
+                JOptionPane.showMessageDialog(null, "Selecione um produto da lista.");
+            } else{
+                model = (DefaultListModel<Item>) list.getModel();
+                model.remove(list.getSelectedIndex());
+            }
         }
     }
 
