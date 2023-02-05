@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import Exceptions.EstoqueInsuficienteException;
 import Exceptions.ProdutoInexistenteException;
 import Exceptions.ProdutoNaoAdcionadoAListaException;
 import construtores.Produto;
@@ -65,11 +66,11 @@ public class CadProduto implements IProdutos {
     }
 
     @Override
-    public void subQuantidade(int codigo, double quantidade) throws Exception {
+    public void subQuantidade(int codigo, double quantidade) throws EstoqueInsuficienteException {
         for (Produto p : listaProdutos)
             if (p.getCodigo() == codigo) {
                 if (p.getQuantidade() - quantidade < 0) {
-                    JOptionPane.showMessageDialog(null, "Quantidade atual insuficiente.");
+                    throw new EstoqueInsuficienteException();
                 } else {
                     p.setQuantidade(p.getQuantidade() - quantidade);
                 }

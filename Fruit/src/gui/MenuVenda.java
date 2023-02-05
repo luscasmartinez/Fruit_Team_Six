@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import Exceptions.NotaNaoAdicionadaException;
 import cadastros.CadItem;
 import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
@@ -82,13 +83,7 @@ public class MenuVenda extends JFrame implements ActionListener {
         comboProdutos.setFont(new Font("Tahoma", Font.PLAIN, 20));
         comboProdutos.setBounds(193, 93, 318, 41);
         comboProdutos.addActionListener(this);
-
-        produtos = listaProdutos.getProdutos();
-
-        for (String p : produtos) {
-            comboProdutos.addItem(p);
-            System.out.println(p);
-        }
+        adcionarProdutosAoComboBox();
         contentPane.add(comboProdutos);
 
         qtdAtual = new JTextPane();
@@ -162,19 +157,13 @@ public class MenuVenda extends JFrame implements ActionListener {
         if(ev.getSource() == btnAddPedido){
             try {
                 Produto p = listaProdutos.getProduto(comboProdutos.getSelectedIndex() + 1);
+                listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
+                Item item = new Item(p, Integer.parseInt(textQtdPedido.getText()));
+                model.addElement(item);
 
-                if (Double.parseDouble(qtdAtual.getText()) >= Double.parseDouble(textQtdPedido.getText())) {
-                    listaProdutos.subQuantidade(p.getCodigo(), Double.parseDouble(textQtdPedido.getText()));
-                    Item item = new Item(p, Integer.parseInt(textQtdPedido.getText()));
-                    // adiciona a lista
-                    model.addElement(item);
+                qtdAtual.setText(p.getQuantidade() + "");
+                textQtdPedido.setText("");
 
-                    qtdAtual.setText(p.getQuantidade() + "");
-                    textQtdPedido.setText("");
-                } else {
-                    JOptionPane.showMessageDialog(null,
-                            "Quantidade atual insuficiente.");
-                }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e);
             }
@@ -190,8 +179,8 @@ public class MenuVenda extends JFrame implements ActionListener {
             codNota++;
             try {
                 listaNotaFiscal.addNotaFiscal(nota);
-            } catch (Exception e1) {
-                e1.printStackTrace();
+            } catch (NotaNaoAdicionadaException e) {
+                JOptionPane.showMessageDialog(null, e);
             }
             System.out.println(nota);
             JOptionPane.showMessageDialog(null, "Nota " + nota.getCodigo() + " Criada!");
@@ -205,6 +194,14 @@ public class MenuVenda extends JFrame implements ActionListener {
         if(ev.getSource() == btnRemover){
             DefaultListModel<Item> model = (DefaultListModel<Item>) list.getModel();
             model.remove(list.getSelectedIndex());
+        }
+    }
+
+    public void adcionarProdutosAoComboBox(){
+        produtos = listaProdutos.getProdutos();
+        for (String p : produtos) {
+            comboProdutos.addItem(p);
+            System.out.println(p);
         }
     }
 }

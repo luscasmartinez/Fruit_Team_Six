@@ -2,6 +2,7 @@ package cadastros;
 
 import java.util.LinkedList;
 
+import Exceptions.NotaNaoAdicionadaException;
 import construtores.Item;
 import construtores.NotaFiscal;
 import interfaces.INotasFiscais;
@@ -14,7 +15,7 @@ public class CadNotaFiscal implements INotasFiscais {
     }
 
     @Override
-    public void addNotaFiscal(NotaFiscal nf) throws Exception {
+    public void addNotaFiscal(NotaFiscal nf) throws NotaNaoAdicionadaException {
         listaNotaFiscal.add(nf);
     }
 

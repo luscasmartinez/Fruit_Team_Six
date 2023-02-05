@@ -20,9 +20,18 @@ import cadastros.CadNotaFiscal;
 import construtores.Item;
 import construtores.NotaFiscal;
 
-public class MenuNota extends JFrame {
+public class MenuNota extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
+	private JComboBox<String> comboNotas;
+	private String[] notas;
+	private JList<Item> listItens;
+	private DefaultListModel<Item> modelNota;
+	private JLabel lblNewLabel;
+
+	private JButton btnCarregar;
+	private JButton btnVoltar;
+	private JButton btnExcluir;
 
 	private CadNotaFiscal listaNotaFiscal;
 
@@ -41,79 +50,85 @@ public class MenuNota extends JFrame {
 		contentPane.setLayout(null);
 
 		// Lista de Notas
-		JComboBox<String> comboNotas = new JComboBox<String>();
+		comboNotas = new JComboBox<String>();
 		comboNotas.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		comboNotas.setBounds(157, 117, 304, 52);
-
-		String[] notas = listaNotaFiscal.getDados();
-
-		for (String nf : notas) {
-			comboNotas.addItem(nf);
-			System.out.println(nf);
-		}
+		adcionarNotasAoComboBox();
 		contentPane.add(comboNotas);
 
-		JList<Item> listItens = new JList<>();
+		listItens = new JList<>();
 		listItens.setBounds(605, 0, 397, 603);
-		DefaultListModel<Item> modelNota = new DefaultListModel<Item>();
+		modelNota = new DefaultListModel<Item>();
 		listItens.setModel(modelNota);
 		contentPane.add(listItens);
 
-		JButton btnCarregar = new JButton("Carregar");
-		btnCarregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// Ao clicar
-				modelNota.clear();
-				try {
-					NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
-					// adiciona a lista
-					for (Item i : nf.getListaItens()) {
-						modelNota.addElement(i);
-					}
-
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null,
-							"Não há notas no sistema.");
-				}
-			}
-		});
+		btnCarregar = new JButton("Carregar");
 		btnCarregar.setBounds(255, 224, 118, 52);
 		contentPane.add(btnCarregar);
+		btnCarregar.addActionListener(this);
 
-		JButton btnVoltar = new JButton(" Voltar");
-		btnVoltar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				setVisible(false);
-			}
-		});
+		btnVoltar = new JButton(" Voltar");
 		btnVoltar.setFont(new Font("Ink Free", Font.PLAIN, 20));
 		btnVoltar.setBounds(10, 535, 192, 57);
 		contentPane.add(btnVoltar);
+		btnVoltar.addActionListener(this);
 
-		JButton btnExcluir = new JButton("Excluir");
-		btnExcluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
-					listaNotaFiscal.removeNotaFiscal(nf.getCodigo());
-					modelNota.clear();
-					MenuNota menuNota = new MenuNota(listaNotaFiscal);
-					setVisible(false);
-					menuNota.setVisible(true);
-				} catch (Exception e1) {
-					JOptionPane.showMessageDialog(null,
-							"Não há notas no sistema.");
-				}
-			}
-		});
+		btnExcluir = new JButton("Excluir");
 		btnExcluir.setFont(new Font("Ink Free", Font.PLAIN, 20));
 		btnExcluir.setBounds(10, 462, 190, 58);
 		contentPane.add(btnExcluir);
+		btnExcluir.addActionListener(this);
 
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon("Fruit\\src\\img\\MenuNota.png"));
 		lblNewLabel.setBounds(0, 0, 608, 603);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		contentPane.add(lblNewLabel);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent ev) {
+
+		if(ev.getSource() == btnCarregar){
+			modelNota.clear();
+			try {
+				NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
+				
+				for (Item i : nf.getListaItens()) {
+					modelNota.addElement(i);
+				}
+
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null,
+						"Não há notas no sistema.");
+			}
+		}
+		
+		if(ev.getSource() == btnVoltar){
+			setVisible(false);
+		}
+
+		if(ev.getSource() == btnExcluir){
+			try {
+				NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
+				listaNotaFiscal.removeNotaFiscal(nf.getCodigo());
+				modelNota.clear();
+				MenuNota menuNota = new MenuNota(listaNotaFiscal);
+				setVisible(false);
+				menuNota.setVisible(true);
+			} catch (Exception e1) {
+				JOptionPane.showMessageDialog(null,
+						"Não há notas no sistema.");
+			}
+		}
+	}
+
+	public void adcionarNotasAoComboBox(){
+		notas = listaNotaFiscal.getDados();
+		for (String nf : notas) {
+			comboNotas.addItem(nf);
+			System.out.println(nf);
+		}
+	}
+
 }
