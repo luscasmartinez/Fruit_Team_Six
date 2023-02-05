@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import javax.swing.JOptionPane;
 
+import Exceptions.ProdutoInexistenteException;
+import Exceptions.ProdutoNaoAdcionadoAListaException;
 import construtores.Produto;
 import interfaces.IProdutos;
 
@@ -16,7 +18,7 @@ public class CadProduto implements IProdutos {
     }
 //3
     @Override
-    public void addProduto(Produto p) throws Exception {
+    public void addProduto(Produto p) throws ProdutoNaoAdcionadoAListaException {
         listaProdutos.add(p);
     }
 
@@ -31,11 +33,11 @@ public class CadProduto implements IProdutos {
     }
 
     @Override
-    public Produto getProduto(int codigo) throws Exception {
+    public Produto getProduto(int codigo) throws ProdutoInexistenteException {
         for (Produto p : listaProdutos)
             if (p.getCodigo() == codigo)
                 return p;
-        return null;
+        throw new ProdutoInexistenteException();
     }
 
     @Override
