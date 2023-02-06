@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -23,7 +24,7 @@ import construtores.NotaFiscal;
 public class MenuNota extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
-	private JComboBox<String> comboNotas;
+	private JComboBox<NotaFiscal> comboNotas;
 	private String[] notas;
 	private JList<Item> listItens;
 	private DefaultListModel<Item> modelNota;
@@ -49,8 +50,8 @@ public class MenuNota extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		// Lista de Notas
-		comboNotas = new JComboBox<String>();
+		//comboNotas = new JComboBox<String>();
+		comboNotas = new JComboBox<NotaFiscal>();
 		comboNotas.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		comboNotas.setBounds(157, 117, 304, 52);
 		adcionarNotasAoComboBox();
@@ -92,15 +93,10 @@ public class MenuNota extends JFrame implements ActionListener {
 		if(ev.getSource() == btnCarregar){
 			modelNota.clear();
 			try {
-				NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
-				
-				for (Item i : nf.getListaItens()) {
-					modelNota.addElement(i);
-				}
-
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null,
-						"Não há notas no sistema.");
+				NotaFiscal nf = listaNotaFiscal.getNotaFiscal(comboNotas.getSelectedIndex() + 1);
+				modelNota.addElement(nf.getItemNF());
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
 			}
 		}
 		
@@ -109,26 +105,25 @@ public class MenuNota extends JFrame implements ActionListener {
 		}
 
 		if(ev.getSource() == btnExcluir){
+			
 			try {
-				NotaFiscal nf = listaNotaFiscal.getNotaFiscal(listItens.getSelectedIndex() + 1);
+				NotaFiscal nf = listaNotaFiscal.getNotaFiscal(comboNotas.getSelectedIndex() + 1);
 				listaNotaFiscal.removeNotaFiscal(nf.getCodigo());
+				comboNotas.remove(listItens.getSelectedIndex());
 				modelNota.clear();
-				MenuNota menuNota = new MenuNota(listaNotaFiscal);
-				setVisible(false);
-				menuNota.setVisible(true);
-			} catch (Exception e1) {
-				JOptionPane.showMessageDialog(null,
-						"Não há notas no sistema.");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, e);
 			}
 		}
 	}
 
 	public void adcionarNotasAoComboBox(){
-		notas = listaNotaFiscal.getDados();
-		for (String nf : notas) {
+		LinkedList<NotaFiscal> notas = listaNotaFiscal.getList();
+		for (NotaFiscal nf : notas) {
 			comboNotas.addItem(nf);
 			System.out.println(nf);
 		}
 	}
-
 }
+
+

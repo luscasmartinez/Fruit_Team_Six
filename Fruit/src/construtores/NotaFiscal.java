@@ -10,10 +10,12 @@ public class NotaFiscal {
 
     private int codigo;
     private Date dataEmissao;
+    private Item item;
 
     public NotaFiscal(int codigo, Date dataEmissao) {
         this.codigo = codigo;
         this.dataEmissao = dataEmissao;
+        this.item = null;
         listaItens = new LinkedList<>();
     }
 
@@ -35,6 +37,14 @@ public class NotaFiscal {
 
     public LinkedList<Item> getListaItens() {
         return this.listaItens;
+    }
+
+    public void setItemNF(Item item){
+        this.item = item;
+    }
+
+    public Item getItemNF(){
+        return this.item;
     }
 
     public void setItem(Item item) {

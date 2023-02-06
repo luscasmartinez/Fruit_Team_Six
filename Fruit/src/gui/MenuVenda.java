@@ -20,6 +20,7 @@ import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
 import Exceptions.NotaNaoAdicionadaException;
+import Exceptions.ProdutoInexistenteException;
 import cadastros.CadItem;
 import cadastros.CadNotaFiscal;
 import cadastros.CadProduto;
@@ -178,6 +179,7 @@ public class MenuVenda extends JFrame implements ActionListener {
             for (int i = 0; i < model.getSize(); i++) {
                 Item item = model.get(i);
                 nota.setItem(item);
+                nota.setItemNF(item);
             }
             codNota++;
             try {
@@ -200,6 +202,8 @@ public class MenuVenda extends JFrame implements ActionListener {
             } else{
                 model = (DefaultListModel<Item>) list.getModel();
                 model.remove(list.getSelectedIndex());
+
+                
             }
         }
     }

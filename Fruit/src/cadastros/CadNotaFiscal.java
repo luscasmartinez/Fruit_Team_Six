@@ -2,6 +2,7 @@ package cadastros;
 
 import java.util.LinkedList;
 
+import Exceptions.NaoHaNotasCadastradasException;
 import Exceptions.NotaNaoAdicionadaException;
 import construtores.Item;
 import construtores.NotaFiscal;
@@ -14,13 +15,17 @@ public class CadNotaFiscal implements INotasFiscais {
         listaNotaFiscal = new LinkedList<NotaFiscal>();
     }
 
+    public LinkedList<NotaFiscal> getList(){
+        return listaNotaFiscal;
+    }
+
     @Override
     public void addNotaFiscal(NotaFiscal nf) throws NotaNaoAdicionadaException {
         listaNotaFiscal.add(nf);
     }
 
     @Override
-    public void removeNotaFiscal(int codigo) throws Exception {
+    public void removeNotaFiscal(int codigo) throws NaoHaNotasCadastradasException {
         listaNotaFiscal.remove(codigo);
     }
 
